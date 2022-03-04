@@ -74,11 +74,14 @@ export default RecipePage
 export const getStaticProps: GetStaticProps = async (context) => {
 	const { slug } = context.params as IParams
 
-	const res = await fetch(`${process.env.API_URL}/api/recipes/?filters[slug]=${slug}`)
+	const res = await fetch(`${process.env.API_URL}/recipes/?filters[slug]=${slug}`)
+	if (!res.ok) {
+		console.error(res.statusText)
+		throw new Error(`An error occured please try again`)
+	}
 
-	const json = await res.json()
-
-	const recipe = json.data[0]
+	const data = await res.json()
+	const recipe = data.data[0]
 
 	return {
 		props: { recipe },
