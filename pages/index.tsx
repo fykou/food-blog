@@ -27,10 +27,11 @@ const Home: React.FC<Props> = ({ recipes }: Props) => {
 export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
-	// TODO Create .env
-	const res = await fetch('http://localhost:1337/api/recipes/')
+	const res = await fetch(`${process.env.API_URL}/recipes/`)
 
 	const json = await res.json()
+
+	console.log(json.data)
 
 	const recipes = json.data
 

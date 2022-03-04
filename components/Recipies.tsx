@@ -19,13 +19,11 @@ const Recipe: React.FC<Props> = ({ recipes: recipes }: Props) => {
 						<section key={recipe.id} className='text-gray-600 body-font'>
 							<div className='container px-5 py-24 mx-auto flex flex-col'>
 								<div className='lg:w-4/6 mx-auto'>
-									<div className='rounded-lg h-64 overflow-hidden'>
-										<Thumbnail
-											slug={recipe.attributes.slug}
-											title={recipe.attributes.title}
-											src={recipe.attributes.thumbnail}
-										/>
-									</div>
+									<Thumbnail
+										slug={recipe.attributes.slug!}
+										title={recipe.attributes.title!}
+										src={recipe.attributes.thumbnail!}
+									/>
 									<div className='flex flex-col sm:flex-row mt-10'>
 										<div className='sm:w-1/3 text-center sm:pr-8 sm:py-8'>
 											<div className='w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400'>
@@ -60,16 +58,18 @@ const Recipe: React.FC<Props> = ({ recipes: recipes }: Props) => {
 										<div className='sm:w-2/3 sm:pl-8 sm:pt-0 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left'>
 											<div className='text-2xl mb-4'>
 												<Link
-													href={`/posts/${recipe.attributes.slug}`}
+													href={`/posts/${recipe.attributes
+														.slug!}`}
 												>
-													<a>{recipe.attributes.title}</a>
+													<a>{recipe.attributes.title!}</a>
 												</Link>
 											</div>
 											<p className='leading-relaxed text-lg mb-4'>
-												{recipe.attributes.description}
+												{recipe.attributes.description!}
 											</p>
 											<a
-												href={`/posts/${recipe.attributes.slug}`}
+												href={`/posts/${recipe.attributes
+													.slug!}`}
 												className='text-indigo-500 inline-flex items-center'
 											>
 												Learn More

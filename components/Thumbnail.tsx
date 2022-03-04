@@ -14,12 +14,16 @@ const Thumbnail: React.FC<Props> = ({ title, src, slug }: Props) => {
 	)
 	return (
 		<>
-			{slug ? (
-				<Link href={`/posts/${slug}`}>
-					<a aria-label={title}>{image}</a>
-				</Link>
+			{src ? (
+				slug ? (
+					<Link href={`/posts/${slug}`}>
+						<a aria-label={title}>{image}</a>
+					</Link>
+				) : (
+					image
+				)
 			) : (
-				image
+				<i>Cover Image for {title}</i>
 			)}
 		</>
 	)
