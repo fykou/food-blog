@@ -31,8 +31,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	const json = await res.json()
 
-	console.log(json.data)
-
 	const recipes = json.data
 
 	return { props: { recipes } }
