@@ -71,7 +71,7 @@ const RecipePage: React.FC<Props> = ({ recipe }: Props) => {
 
 export default RecipePage
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetStaticProps = async (context) => {
 	const { slug } = context.params as IParams
 
 	const res = await fetch(`${process.env.API_URL}/recipes/?filters[slug]=${slug}`)
@@ -88,7 +88,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	}
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getServerSidePaths: GetStaticPaths = async () => {
 	const res = await fetch(`${process.env.API_URL}/recipes/`)
 
 	const json = await res.json()

@@ -26,7 +26,7 @@ const Home: React.FC<Props> = ({ recipes }: Props) => {
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetStaticProps = async () => {
 	const res = await fetch(`${process.env.API_URL}/recipes/`)
 
 	const json = await res.json()
