@@ -1,22 +1,16 @@
 // pages/index.tsx
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
-import Footer from '../components/Footer'
-import Header from '../components/Navigation'
-
 import Layout from '../components/Layout'
 import Recipe from '../components/Recipies'
-import Thumbnail from '../components/Thumbnail'
-import { IPost } from '../types/post'
+import { IRecipe } from '../types/recipe'
 import { SITE_NAME } from '../utils/constants'
-import { getAllPosts } from '../utils/mdxUtils'
 
 type Props = {
-	posts: IPost[]
+	recipes: IRecipe[]
 }
 
-const Home: React.FC<Props> = ({ posts }: Props) => {
+const Home: React.FC<Props> = ({ recipes }: Props) => {
 	return (
 		<>
 			<Layout>
@@ -24,7 +18,7 @@ const Home: React.FC<Props> = ({ posts }: Props) => {
 					<title>{SITE_NAME}</title>
 				</Head>
 
-				<Recipe posts={posts}></Recipe>
+				<Recipe recipes={recipes}></Recipe>
 			</Layout>
 		</>
 	)
@@ -33,7 +27,13 @@ const Home: React.FC<Props> = ({ posts }: Props) => {
 export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
-	const posts = getAllPosts(['slug', 'date', 'thumbnail', 'title', 'description'])
+	const res = await fetch(`${process.env.API_URL}/recipes/`)
 
-	return { props: { posts } }
+	const json = await res.json()
+
+	console.log(json.data)
+
+	const recipes = json.data
+
+	return { props: { recipes } }
 }

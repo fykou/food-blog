@@ -1,20 +1,21 @@
 import { GetStaticProps, GetStaticPaths } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import { serialize } from 'next-mdx-remote/serialize'
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { ParsedUrlQuery } from 'querystring'
+import ReactMarkdown from 'react-markdown'
 
 import Directions from '../../components/Directions'
 import Ingredients from '../../components/Ingredients'
 import Layout from '../../components/Layout'
 import Thumbnail from '../../components/Thumbnail'
-import { IPost } from '../../types/post'
-import { SITE_URL } from '../../utils/constants'
-import { getPost, getAllPosts } from '../../utils/mdxUtils'
+import { IRecipe } from '../../types/recipe'
 
 type Props = {
-	source: MDXRemoteSerializeResult
-	frontMatter: Omit<IPost, 'slug'>
+	recipe: IRecipe
+}
+
+interface IParams extends ParsedUrlQuery {
+	slug: string
 }
 
 const components = {
@@ -23,66 +24,77 @@ const components = {
 	Tips: dynamic(() => import('../../components/Tips')),
 }
 
-const PostPage: React.FC<Props> = ({ source, frontMatter }: Props) => {
-	const ogImage = SITE_URL + frontMatter.thumbnail
-
+const RecipePage: React.FC<Props> = ({ recipe }: Props) => {
 	return (
-		<Layout pageTitle={frontMatter.title}>
+		<Layout pageTitle={recipe.attributes.title}>
 			<Head>
 				<meta
 					name='description'
-					content={frontMatter.description}
+					content={recipe.attributes.description}
 					key='description'
 				/>
 				<meta
 					property='og:description'
-					content={frontMatter.description}
+					content={recipe.attributes.description}
 					key='ogDescription'
 				/>
-				<meta property='og:image' content={ogImage} key='ogImage' />
 			</Head>
 
 			<article className='prose prose-green'>
 				<div className='mb-4'>
-					<Thumbnail title={frontMatter.title} src={frontMatter.thumbnail} />
+					<Thumbnail
+						title={recipe.attributes.title}
+						src={recipe.attributes.thumbnail}
+					/>
 				</div>
 
-				<h1>{frontMatter.title}</h1>
+				<h1>{recipe.attributes.title}</h1>
 
-				<p className='font-bold'>yield: {frontMatter.yields}</p>
+				<p className='font-bold'>yield: {recipe.attributes.yields}</p>
 
-				<p>{frontMatter.description}</p>
+				<p>{recipe.attributes.description}</p>
 
-				{/* @ts-ignore */}
-				<MDXRemote {...source} components={components}>
-					{' '}
-				</MDXRemote>
+				<Ingredients ingredients={recipe.attributes.ingredients} />
+
+				<Directions directions={recipe.attributes.directions} />
+
+				<div className='mt-4'>
+					<components.Tips tips={recipe.attributes.tips} />
+				</div>
+
+				{/* eslint-disable-next-line react/no-children-prop */}
+				<ReactMarkdown children={recipe.attributes.other} />
 			</article>
 		</Layout>
 	)
 }
 
-export default PostPage
+export default RecipePage
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { content, data } = getPost(params?.slug as string)
+export const getStaticProps: GetStaticProps = async (context) => {
+	const { slug } = context.params as IParams
 
-	const mdxSource = await serialize(content, { scope: data })
+	const res = await fetch(`http://localhost:1337/api/recipes/?filters[slug]=${slug}`)
+
+	const json = await res.json()
+
+	const recipe = json.data[0]
 
 	return {
-		props: {
-			source: mdxSource,
-			frontMatter: data,
-		},
+		props: { recipe },
 	}
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const posts = getAllPosts(['slug'])
+	const res = await fetch('http://localhost:1337/api/recipes/')
 
-	const paths = posts.map((post) => ({
+	const json = await res.json()
+
+	const recipes = json.data
+
+	const paths = recipes.map((recipe: IRecipe) => ({
 		params: {
-			slug: post.slug,
+			slug: recipe.attributes.slug,
 		},
 	}))
 
