@@ -74,7 +74,7 @@ export default RecipePage
 export const getStaticProps: GetStaticProps = async (context) => {
 	const { slug } = context.params as IParams
 
-	const res = await fetch(`http://localhost:1337/api/recipes/?filters[slug]=${slug}`)
+	const res = await fetch(`${process.env.API_URL}/api/recipes/?filters[slug]=${slug}`)
 
 	const json = await res.json()
 
@@ -86,7 +86,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const res = await fetch('http://localhost:1337/api/recipes/')
+	const res = await fetch(`${process.env.API_URL}/recipes/`)
 
 	const json = await res.json()
 
