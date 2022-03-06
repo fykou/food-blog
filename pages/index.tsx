@@ -31,13 +31,12 @@ const Home: React.FC<Props> = ({ recipes, errorCode }: Props) => {
 
 export default Home
 
-export const getServerSideProps: GetStaticProps = async ({ res }: any) => {
+export const getServerSideProps: GetStaticProps = async () => {
 	const data = await fetch(`${process.env.API_URL}/api/recipes?populate=*`)
 
 	const errorCode = data.ok ? false : data.status
 
 	if (errorCode) {
-		res.status = errorCode
 		console.error(errorCode, data.statusText, 'on', data.url)
 	}
 
