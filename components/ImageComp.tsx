@@ -15,8 +15,8 @@ const Thumbnail: React.FC<Props> = ({ title, src, slug }: Props) => {
 			className='rounded-lg'
 			src={src}
 			alt={`Cover Image for ${title}`}
-			width={1280}
-			height={720}
+			width={1280 / 3}
+			height={720 / 3}
 		/>
 	)
 
