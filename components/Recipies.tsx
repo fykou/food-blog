@@ -24,7 +24,7 @@ const Recipe: React.FC<Props> = ({ recipes: recipes }: Props) => {
 										title={recipe.attributes.title!}
 										src={
 											recipe.attributes.coverImage.data
-												?.attributes.formats.medium.url!
+												?.attributes.url
 										}
 									/>
 									<div className='flex flex-col sm:flex-row mt-10'>
