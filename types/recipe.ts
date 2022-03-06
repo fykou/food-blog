@@ -9,6 +9,8 @@ export interface IRecipe {
 		yields: string
 		ingredients: string[]
 		directions: string[]
+		imperial: boolean
+		coverImage: any
 		tips: string[]
 		other: string
 	}

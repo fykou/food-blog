@@ -2,7 +2,10 @@
 const nextConfig = {
 	reactStrictMode: true,
 	images: {
-		domains: ['img.icons8.com'],
+		domains: ['img.icons8.com', 'localhost', 'emilyskitchenstrapi.herokuapp.com'],
+	},
+	env: {
+		API_URL: process.env.API_URL,
 	},
 }
 

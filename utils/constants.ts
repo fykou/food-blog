@@ -1,3 +1,3 @@
-export const SITE_URL = 'http://localhost:3000'
-export const SITE_NAME = "Em's Blog"
+export const SITE_URL = 'https://emilyskitchen.herokuapp.com/'
+export const SITE_NAME = 'Emilys Kitchen'
 export const TWITTER_USERNAME = '@Karabeika'

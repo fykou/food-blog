@@ -7,10 +7,11 @@ import ReactMarkdown from 'react-markdown'
 import Directions from '../../components/Directions'
 import Ingredients from '../../components/Ingredients'
 import Layout from '../../components/Layout'
-import Thumbnail from '../../components/Thumbnail'
+import ImageComp from '../../components/ImageComp'
 import { IRecipe } from '../../types/recipe'
 
 type Props = {
+	errorCode: any
 	recipe: IRecipe
 }
 
@@ -24,47 +25,60 @@ const components = {
 	Tips: dynamic(() => import('../../components/Tips')),
 }
 
-const RecipePage: React.FC<Props> = ({ recipe }: Props) => {
+const RecipePage: React.FC<Props> = ({ recipe, errorCode }: Props) => {
 	return (
-		<Layout pageTitle={recipe.attributes.title}>
+		<Layout pageTitle={recipe?.attributes.title || errorCode}>
 			<Head>
 				<meta
 					name='description'
-					content={recipe.attributes.description}
+					content={recipe?.attributes.description || errorCode}
 					key='description'
 				/>
 				<meta
 					property='og:description'
-					content={recipe.attributes.description}
+					content={recipe?.attributes.description || errorCode}
 					key='ogDescription'
 				/>
 			</Head>
 
-			<article className='prose prose-green'>
-				<div className='mb-4'>
-					<Thumbnail
-						title={recipe.attributes.title}
-						src={recipe.attributes.thumbnail}
-					/>
+			{(errorCode && (
+				<div className='mt-16 flex flex-col items-center'>
+					<p>Sorry, something seems to be broken.</p>
+					<p>Status - {errorCode}</p>
+					<a className='mt-8' href='\'>
+						Click here to go to the homepage
+					</a>
 				</div>
+			)) || (
+				<article className='prose prose-green'>
+					<div className='mb-4'>
+						<ImageComp
+							title={recipe.attributes.title!}
+							src={
+								recipe.attributes.coverImage?.data?.attributes.formats
+									.medium.url!
+							}
+						/>
+					</div>
 
-				<h1>{recipe.attributes.title}</h1>
+					<h1>{recipe.attributes.title}</h1>
 
-				<p className='font-bold'>yield: {recipe.attributes.yields}</p>
+					<p className='font-bold'>yield: {recipe.attributes.yields}</p>
 
-				<p>{recipe.attributes.description}</p>
+					<p>{recipe.attributes.description}</p>
 
-				<Ingredients ingredients={recipe.attributes.ingredients} />
+					<Ingredients ingredients={recipe.attributes.ingredients} />
 
-				<Directions directions={recipe.attributes.directions} />
+					<Directions directions={recipe.attributes.directions} />
 
-				<div className='mt-4'>
-					<components.Tips tips={recipe.attributes.tips} />
-				</div>
+					<div className='mt-4'>
+						<components.Tips tips={recipe.attributes.tips} />
+					</div>
 
-				{/* eslint-disable-next-line react/no-children-prop */}
-				<ReactMarkdown children={recipe.attributes.other} />
-			</article>
+					{/* eslint-disable-next-line react/no-children-prop */}
+					<ReactMarkdown children={recipe.attributes.other} />
+				</article>
+			)}
 		</Layout>
 	)
 }
@@ -74,24 +88,34 @@ export default RecipePage
 export const getServerSideProps: GetStaticProps = async (context) => {
 	const { slug } = context.params as IParams
 
-	const res = await fetch(`${process.env.API_URL}/recipes/?filters[slug]=${slug}`)
-	if (!res.ok) {
-		console.error(res.statusText)
-		throw new Error(`An error occured please try again`)
+	const data = await fetch(
+		`${process.env.API_URL}/ap/recipes/?filters[slug]=${slug}&populate=*`
+	)
+
+	const errorCode = data.ok ? false : data.status
+	let recipe = null
+	if (errorCode) {
+		console.error(errorCode, data.statusText, 'on', data.url)
+	} else {
+		const json = await data.json()
+		recipe = json.data[0]
 	}
-
-	const data = await res.json()
-	const recipe = data.data[0]
-
 	return {
-		props: { recipe },
+		props: { errorCode, recipe },
 	}
 }
 
-export const getServerSidePaths: GetStaticPaths = async () => {
-	const res = await fetch(`${process.env.API_URL}/recipes/`)
+export const getServerSidePaths: GetStaticPaths = async ({ res }: any) => {
+	const data = await fetch(`${process.env.API_URL}/api/recipes?populate=*`)
 
-	const json = await res.json()
+	const errorCode = data.ok ? false : data.status
+
+	if (errorCode) {
+		res.status = errorCode
+		console.error(errorCode, data.statusText, 'on', data.url)
+	}
+
+	const json = await data.json()
 
 	const recipes = json.data
 

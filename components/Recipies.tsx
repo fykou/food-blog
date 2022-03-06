@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { IRecipe } from '../types/recipe'
-import Thumbnail from './Thumbnail'
+import ImageComp from './ImageComp'
+import Image from 'next/image'
 
 type Props = {
 	recipes: IRecipe[]
@@ -12,20 +13,22 @@ const Recipe: React.FC<Props> = ({ recipes: recipes }: Props) => {
 	return (
 		<>
 			<h1 className='text-4xl font-bold mb-4'>Recipes</h1>
-
 			<div className='space-y-12'>
 				{recipes &&
 					recipes.map((recipe) => (
 						<section key={recipe.id} className='text-gray-600 body-font'>
 							<div className='container px-5 py-24 mx-auto flex flex-col'>
-								<div className='lg:w-4/6 mx-auto'>
-									<Thumbnail
+								<div className='lg:w-4/6 mx-auto flex flex-col justify-center items-center'>
+									<ImageComp
 										slug={recipe.attributes.slug!}
 										title={recipe.attributes.title!}
-										src={recipe.attributes.thumbnail!}
+										src={
+											recipe.attributes.coverImage.data
+												?.attributes.formats.medium.url!
+										}
 									/>
 									<div className='flex flex-col sm:flex-row mt-10'>
-										<div className='sm:w-1/3 text-center sm:pr-8 sm:py-8'>
+										{/* <div className='sm:w-1/3 text-center sm:pr-8 sm:py-8'>
 											<div className='w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400'>
 												<svg
 													fill='none'
@@ -54,8 +57,9 @@ const Recipe: React.FC<Props> = ({ recipes: recipes }: Props) => {
 													consectetur adipisicing elit.
 												</p>
 											</div>
-										</div>
-										<div className='sm:w-2/3 sm:pl-8 sm:pt-0 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left'>
+										</div> */}
+										{/* <div className='sm:w-2/3 sm:pl-8 sm:pt-0 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left'> */}
+										<div className='border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center'>
 											<div className='text-2xl mb-4'>
 												<Link
 													href={`/posts/${recipe.attributes
