@@ -54,10 +54,7 @@ const RecipePage: React.FC<Props> = ({ recipe, errorCode }: Props) => {
 					<div className='mb-4'>
 						<ImageComp
 							title={recipe.attributes.title!}
-							src={
-								recipe.attributes.coverImage?.data?.attributes.formats
-									.medium.url!
-							}
+							src={recipe.attributes.coverImage?.data?.attributes.url!}
 						/>
 					</div>
 
