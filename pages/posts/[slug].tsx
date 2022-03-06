@@ -86,7 +86,7 @@ export const getServerSideProps: GetStaticProps = async (context) => {
 	const { slug } = context.params as IParams
 
 	const data = await fetch(
-		`${process.env.API_URL}/ap/recipes/?filters[slug]=${slug}&populate=*`
+		`${process.env.API_URL}/api/recipes/?filters[slug]=${slug}&populate=*`
 	)
 
 	const errorCode = data.ok ? false : data.status
