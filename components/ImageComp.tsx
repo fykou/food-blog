@@ -9,7 +9,7 @@ type Props = {
 }
 
 const Thumbnail: React.FC<Props> = ({ title, src, slug }: Props) => {
-	src = src ? `${process.env.API_URL}${src}` : '/placeholder.png'
+	src = src ? `${src}` : '/placeholder.png'
 	let image = (
 		<Image
 			className='rounded-lg'
