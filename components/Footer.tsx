@@ -6,6 +6,17 @@ import { SITE_NAME, TWITTER_USERNAME } from '../utils/constants'
 export default function Footer() {
 	return (
 		<footer className='text-gray-600 body-font'>
+			<div className='container px-5 mx-auto flex items-center flex-col'>
+				<p className='text-gray-400'>
+					This webpage is still under development and will recieve frequent
+					updates.
+				</p>
+				<p className='text-gray-400'>
+					Website or recipe suggestions? Send an email to{' '}
+					<a href='mailto: alex.hoeyby@gmail.com'>alex.hoeyby@gmail.com</a>{' '}
+					(Or tell Emily).
+				</p>
+			</div>
 			<div className='container px-5 py-8 sm:pb-4 mx-auto flex items-center sm:flex-row flex-col'>
 				<a className='flex title-font font-medium items-center md:justify-start justify-center text-gray-900'>
 					<Image
