@@ -12,11 +12,10 @@ const Thumbnail: React.FC<Props> = ({ title, src, slug }: Props) => {
 	src = src ? `${src}` : '/placeholder.png'
 	let image = (
 		<Image
-			className='rounded-lg'
 			src={src}
 			alt={`Cover Image for ${title}`}
-			width={1280 / 3}
-			height={720 / 3}
+			layout='fill'
+			objectFit='cover'
 		/>
 	)
 
@@ -24,10 +23,12 @@ const Thumbnail: React.FC<Props> = ({ title, src, slug }: Props) => {
 		<>
 			{slug ? (
 				<Link href={`/posts/${slug}`}>
-					<a aria-label={title}>{image}</a>
+					<a className='w-56 h-36' aria-label={title}>
+						<div className='w-full h-full relative'>{image}</div>
+					</a>
 				</Link>
 			) : (
-				image
+				<div className='w-full h-96 relative'>{image}</div>
 			)}
 		</>
 	)
