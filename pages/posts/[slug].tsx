@@ -58,22 +58,29 @@ const RecipePage: React.FC<Props> = ({ recipe, errorCode }: Props) => {
 						/>
 					</div>
 
-					<h1>{recipe.attributes.title}</h1>
+					<h1 className='px-4'>{recipe.attributes.title}</h1>
 
-					<p className='font-bold'>yield: {recipe.attributes.yields}</p>
+					<p className='font-bold px-4'>yield: {recipe.attributes.yields}</p>
 
-					<p>{recipe.attributes.description}</p>
+					<p className='px-4'>{recipe.attributes.description}</p>
 
-					<Ingredients ingredients={recipe.attributes.ingredients} />
-
-					<Directions directions={recipe.attributes.directions} />
-
-					<div className='mt-4'>
-						<components.Tips tips={recipe.attributes.tips} />
+					<div className='bg-[#F5F2F0]'>
+						<div className='px-4'>
+							<Ingredients ingredients={recipe.attributes.ingredients} />
+						</div>
 					</div>
 
-					{/* eslint-disable-next-line react/no-children-prop */}
-					<ReactMarkdown children={recipe.attributes.other} />
+					<div className='px-4'>
+						<Directions directions={recipe.attributes.directions} />
+					</div>
+
+					<div className='px-4'>
+						<components.Tips tips={recipe.attributes.tips} />
+					</div>
+					<div className='px-4'>
+						{/* eslint-disable-next-line react/no-children-prop */}
+						<ReactMarkdown children={recipe.attributes.other} />
+					</div>
 				</article>
 			)}
 		</Layout>

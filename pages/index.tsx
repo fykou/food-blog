@@ -2,7 +2,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Layout from '../components/Layout'
-import Recipe from '../components/Recipies'
+import Recipes from '../components/Recipies'
 import { IRecipe } from '../types/recipe'
 import { SITE_NAME } from '../utils/constants'
 
@@ -23,7 +23,7 @@ const Home: React.FC<Props> = ({ recipes, errorCode }: Props) => {
 						<p>Sorry, something seems to be broken.</p>
 						<p>Status - {errorCode}</p>
 					</div>
-				)) || <Recipe recipes={recipes}></Recipe>}
+				)) || <Recipes recipes={recipes}></Recipes>}
 			</Layout>
 		</>
 	)
