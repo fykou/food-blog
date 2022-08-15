@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { IRecipe } from '../types/recipe'
 import ImageComp from './ImageComp'
 import Image from 'next/image'
+import { RecipeCarousel } from './RecipeCarousel'
 
 type Props = {
 	recipes: IRecipe[]
@@ -9,26 +10,30 @@ type Props = {
 
 const link = 'posts/'
 
-const Recipe: React.FC<Props> = ({ recipes: recipes }: Props) => {
+const Recipes: React.FC<Props> = ({ recipes: recipes }: Props) => {
 	return (
 		<>
 			<h1 className='text-4xl font-bold mb-4'>Recipes</h1>
 			<div className='space-y-12'>
-				{recipes &&
-					recipes.map((recipe) => (
-						<section key={recipe.id} className='text-gray-600 body-font'>
-							<div className='container px-5 py-24 mx-auto flex flex-col'>
-								<div className='lg:w-4/6 mx-auto flex flex-col justify-center items-center'>
-									<ImageComp
-										slug={recipe.attributes.slug!}
-										title={recipe.attributes.title!}
-										src={
-											recipe.attributes.coverImage.data
-												?.attributes.url
-										}
-									/>
-									<div className='flex flex-col sm:flex-row mt-10'>
-										{/* <div className='sm:w-1/3 text-center sm:pr-8 sm:py-8'>
+				<RecipeCarousel>
+					{recipes &&
+						recipes.map((recipe) => (
+							<section
+								key={recipe.id}
+								className='text-gray-600 body-font p-4'
+							>
+								<div className='container mx-auto flex flex-col'>
+									<div className='mx-auto flex flex-col justify-center items-center'>
+										<ImageComp
+											slug={recipe.attributes.slug!}
+											title={recipe.attributes.title!}
+											src={
+												recipe.attributes.coverImage.data
+													?.attributes.url
+											}
+										/>
+										<div className='flex flex-col sm:flex-row'>
+											{/* <div className='sm:w-1/3 text-center sm:pr-8 sm:py-8'>
 											<div className='w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400'>
 												<svg
 													fill='none'
@@ -58,46 +63,49 @@ const Recipe: React.FC<Props> = ({ recipes: recipes }: Props) => {
 												</p>
 											</div>
 										</div> */}
-										{/* <div className='sm:w-2/3 sm:pl-8 sm:pt-0 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left'> */}
-										<div className='border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center'>
-											<div className='text-2xl mb-4'>
-												<Link
+											{/* <div className='sm:w-2/3 sm:pl-8 sm:pt-0 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left'> */}
+											<div className='border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center'>
+												<div className='text-2xl mb-4'>
+													<Link
+														href={`/posts/${recipe
+															.attributes.slug!}`}
+													>
+														<a>
+															{recipe.attributes.title!}
+														</a>
+													</Link>
+												</div>
+												{/* <p className='leading-relaxed text-lg mb-4'>
+													{recipe.attributes.description!}
+												</p> */}
+												<a
 													href={`/posts/${recipe.attributes
 														.slug!}`}
+													className='text-indigo-500 inline-flex items-center'
 												>
-													<a>{recipe.attributes.title!}</a>
-												</Link>
+													Learn More
+													<svg
+														fill='none'
+														stroke='currentColor'
+														strokeLinecap='round'
+														strokeLinejoin='round'
+														strokeWidth='2'
+														className='w-4 h-4 ml-2'
+														viewBox='0 0 24 24'
+													>
+														<path d='M5 12h14M12 5l7 7-7 7'></path>
+													</svg>
+												</a>
 											</div>
-											<p className='leading-relaxed text-lg mb-4'>
-												{recipe.attributes.description!}
-											</p>
-											<a
-												href={`/posts/${recipe.attributes
-													.slug!}`}
-												className='text-indigo-500 inline-flex items-center'
-											>
-												Learn More
-												<svg
-													fill='none'
-													stroke='currentColor'
-													strokeLinecap='round'
-													strokeLinejoin='round'
-													strokeWidth='2'
-													className='w-4 h-4 ml-2'
-													viewBox='0 0 24 24'
-												>
-													<path d='M5 12h14M12 5l7 7-7 7'></path>
-												</svg>
-											</a>
 										</div>
 									</div>
 								</div>
-							</div>
-						</section>
-					))}
+							</section>
+						))}
+				</RecipeCarousel>
 			</div>
 		</>
 	)
 }
 
-export default Recipe
+export default Recipes

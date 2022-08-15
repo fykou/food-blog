@@ -13,7 +13,7 @@ const Layout: React.FC<Props> = ({ children, pageTitle }: Props) => {
 		<>
 			<Meta pageTitle={pageTitle} />
 			<Header />
-			<div className='max-w-screen-lg mx-auto px-4'>
+			<div className='px-4'>
 				<main className='flex flex-col items-center pt-4 pb-12'>
 					{children}
 				</main>
