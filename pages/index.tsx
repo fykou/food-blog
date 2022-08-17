@@ -2,7 +2,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Layout from '../components/Layout'
-import { RecipeCarousel } from '../components/RecipeCarousel'
+import RecipeCarousel from '../components/RecipeCarousel'
 import { IRecipe } from '../types/recipe'
 import { SITE_NAME } from '../utils/constants'
 
