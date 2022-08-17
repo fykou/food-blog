@@ -64,7 +64,7 @@ const RecipePage: React.FC<Props> = ({ recipe, errorCode }: Props) => {
 
 					<p className='px-4'>{recipe.attributes.description}</p>
 
-					<div className='bg-[#F5F2F0]'>
+					<div className='bg-secondary'>
 						<div className='px-4'>
 							<Ingredients ingredients={recipe.attributes.ingredients} />
 						</div>

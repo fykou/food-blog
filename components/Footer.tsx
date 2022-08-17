@@ -1,24 +1,27 @@
 import React from 'react'
 import Image from 'next/image'
 
-import { SITE_NAME, TWITTER_USERNAME } from '../utils/constants'
+import { ORGINIZATION, SITE_NAME, TWITTER_USERNAME } from '../utils/constants'
 
 export default function Footer() {
 	return (
-		<footer className='text-gray-600 body-font'>
-			<div className='container px-5 mx-auto flex items-center flex-col'>
-				<p className='text-gray-400'>
+		<footer className='text-gray-600 body-font pt-8 bg-secondary'>
+			{/* Temp message */}
+			<div className='container px-5 mx-auto flex items-center justify-center flex-col'>
+				<p className='text-gray-400 text-center'>
 					This webpage is still under development and will recieve frequent
 					updates.
 				</p>
-				<p className='text-gray-400'>
+				<p className='text-gray-400 text-center'>
 					Website or recipe suggestions? Send an email to{' '}
 					<a href='mailto: alex.hoeyby@gmail.com'>alex.hoeyby@gmail.com</a>{' '}
 					(Or tell Emily).
 				</p>
 			</div>
-			<div className='container px-5 py-8 sm:pb-4 mx-auto flex items-center sm:flex-row flex-col'>
-				<a className='flex title-font font-medium items-center md:justify-start justify-center text-gray-900'>
+			{/* Temp message end*/}
+
+			<section className='flex items-center container p-8 mx-auto flex-col sm:flex-row lg:max-w-4xl'>
+				<a className='flex font-medium items-center text-gray-900'>
 					<Image
 						width={50}
 						height={50}
@@ -27,17 +30,21 @@ export default function Footer() {
 					/>
 					<span className='ml-3 text-xl'>{SITE_NAME}</span>
 				</a>
+
 				<p className='text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4'>
-					© 2022 Emily —
-					<a
-						href='#'
-						className='text-gray-600 ml-1'
-						rel='noopener noreferrer'
-						target='_blank'
-					>
-						{TWITTER_USERNAME}
-					</a>
+					© {new Date().getFullYear()} {ORGINIZATION}
+					{TWITTER_USERNAME ? (
+						<a
+							href={`https://twitter.com/${TWITTER_USERNAME}`}
+							className='text-gray-600 ml-1'
+							rel='noopener noreferrer'
+							target='_blank'
+						>
+							- @{TWITTER_USERNAME}
+						</a>
+					) : null}
 				</p>
+
 				<span className='inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start'>
 					<a className='text-gray-500'>
 						<svg
@@ -102,7 +109,7 @@ export default function Footer() {
 						</svg>
 					</a>
 				</span>
-			</div>
+			</section>
 		</footer>
 	)
 }
