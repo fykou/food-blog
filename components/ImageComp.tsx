@@ -11,14 +11,7 @@ type Props = {
 
 const Thumbnail: React.FC<Props> = ({ title, src, slug, clickable = false }: Props) => {
 	src = src ? `${src}` : '/placeholder.png'
-	let image = (
-		<Image
-			src={src}
-			alt={`Cover Image for ${title}`}
-			layout='fill'
-			objectFit='cover'
-		/>
-	)
+	let image = <Image src={src} alt={`Cover Image for ${title}`} layout='fill' />
 
 	return (
 		<>

@@ -26,3 +26,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+.slick-prev:before,
+.slick-next:before {
+  color: #363636 !important;
+}

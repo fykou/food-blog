@@ -8,25 +8,25 @@ type Props = {
 	recipes: IRecipe[]
 }
 
-// create a class that takes a property called recipes and returns a component
-
 export default class Responsive extends Component<Props> {
 	render() {
 		const settings = {
 			dots: true,
-			infinite: false,
+			infinite: true,
 			speed: 500,
 			slidesToShow: 4,
 			slidesToScroll: 4,
 			initialSlide: 0,
+			autoplay: true,
+			autoplaySpeed: 5000,
+			adaptiveHeight: true,
+			arrows: true,
 			responsive: [
 				{
 					breakpoint: 1300,
 					settings: {
 						slidesToShow: 3,
 						slidesToScroll: 3,
-						infinite: true,
-						dots: true,
 					},
 				},
 				{
@@ -34,7 +34,6 @@ export default class Responsive extends Component<Props> {
 					settings: {
 						slidesToShow: 2,
 						slidesToScroll: 2,
-						initialSlide: 2,
 					},
 				},
 				{
@@ -47,11 +46,11 @@ export default class Responsive extends Component<Props> {
 			],
 		}
 		return (
-			<div className='flex flex-col items-center'>
+			<div className='w-screen flex flex-col items-center'>
 				<h1 className='text-3xl font-bold no-underline text-gray-800'>
 					Recipes
 				</h1>
-				<div className='container w-screen px-16 mx-auto mt-8'>
+				<div className='w-screen px-16 mx-auto mt-8'>
 					<Slider {...settings}>
 						{this.props.recipes &&
 							this.props.recipes.map((recipe) => (
@@ -69,7 +68,7 @@ export default class Responsive extends Component<Props> {
 											}
 										/>
 
-										<div className='hidden md:block text-center'>
+										<div className='text-center'>
 											<h5 className='text-xl'>
 												<Link
 													href={`/posts/${recipe.attributes
