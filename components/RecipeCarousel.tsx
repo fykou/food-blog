@@ -15,8 +15,7 @@ export default class Responsive extends Component<Props> {
 			infinite: true,
 			speed: 500,
 			slidesToShow: 4,
-			slidesToScroll: 4,
-			initialSlide: 0,
+			swipeToSlide: true,
 			autoplay: true,
 			autoplaySpeed: 5000,
 			adaptiveHeight: true,
@@ -26,21 +25,18 @@ export default class Responsive extends Component<Props> {
 					breakpoint: 1300,
 					settings: {
 						slidesToShow: 3,
-						slidesToScroll: 3,
 					},
 				},
 				{
-					breakpoint: 1000,
+					breakpoint: 900,
 					settings: {
 						slidesToShow: 2,
-						slidesToScroll: 2,
 					},
 				},
 				{
 					breakpoint: 650,
 					settings: {
 						slidesToShow: 1,
-						slidesToScroll: 1,
 					},
 				},
 			],
@@ -50,7 +46,7 @@ export default class Responsive extends Component<Props> {
 				<h1 className='text-3xl font-bold no-underline text-gray-800'>
 					Recipes
 				</h1>
-				<div className='w-screen px-16 mx-auto mt-8'>
+				<div className='max-w-7xl w-screen px-16 mx-auto mt-8'>
 					<Slider {...settings}>
 						{this.props.recipes &&
 							this.props.recipes.map((recipe) => (
