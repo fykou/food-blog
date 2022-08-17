@@ -6,9 +6,10 @@ type Props = {
 	title: string
 	src: string
 	slug?: string
+	clickable?: boolean
 }
 
-const Thumbnail: React.FC<Props> = ({ title, src, slug }: Props) => {
+const Thumbnail: React.FC<Props> = ({ title, src, slug, clickable = false }: Props) => {
 	src = src ? `${src}` : '/placeholder.png'
 	let image = (
 		<Image
@@ -22,11 +23,17 @@ const Thumbnail: React.FC<Props> = ({ title, src, slug }: Props) => {
 	return (
 		<>
 			{slug ? (
-				<Link href={`/posts/${slug}`}>
+				clickable ? (
+					<Link href={`/posts/${slug}`}>
+						<a className='w-56 h-36' aria-label={title}>
+							<div className='w-full h-full relative'>{image}</div>
+						</a>
+					</Link>
+				) : (
 					<a className='w-56 h-36' aria-label={title}>
 						<div className='w-full h-full relative'>{image}</div>
 					</a>
-				</Link>
+				)
 			) : (
 				<div className='w-full h-96 relative'>{image}</div>
 			)}
