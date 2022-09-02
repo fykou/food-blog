@@ -5,7 +5,7 @@ const nextConfig = {
 		domains: [
 			'img.icons8.com',
 			'localhost',
-			'emilyskitchenstrapi.herokuapp.com',
+			'em-strapi-bucket.s3.eu-north-1.amazonaws.com',
 			'res.cloudinary.com',
 		],
 	},
