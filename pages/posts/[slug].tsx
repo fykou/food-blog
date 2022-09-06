@@ -2,7 +2,6 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
-import ReactMarkdown from 'react-markdown'
 
 import Directions from '../../components/Directions'
 import Ingredients from '../../components/Ingredients'
@@ -24,6 +23,8 @@ const components = {
 	Directions,
 	Tips: dynamic(() => import('../../components/Tips')),
 }
+
+const ReactMarkdown = dynamic(() => import('react-markdown'), {})
 
 const RecipePage: React.FC<Props> = ({ recipe, errorCode }: Props) => {
 	return (
