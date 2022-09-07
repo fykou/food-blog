@@ -1,24 +1,47 @@
-// components/Thumbnail.tsx
 import Image from 'next/image'
 import Link from 'next/link'
 
 type Props = {
 	title: string
 	src: string
+	formats?: any
 	slug?: string
 	clickable?: boolean
 }
 
-const Thumbnail: React.FC<Props> = ({ title, src, slug, clickable = false }: Props) => {
-	src = src ? `${src}` : '/placeholder.png'
-	let image = <Image src={src} alt={`Cover Image for ${title}`} layout='fill' />
+const ImageComp: React.FC<Props> = ({
+	title,
+	src,
+	slug,
+	formats,
+	clickable = false,
+}: Props) => {
+	let imageurl = null
+
+	if (formats) {
+		imageurl = formats.small.url
+	} else {
+		imageurl = src ? `${src}` : '/placeholder.png'
+	}
+	let image = (
+		<Image
+			src={imageurl}
+			alt={`Cover Image for ${title}`}
+			blurDataURL={imageurl}
+			quality={40}
+			placeholder='blur'
+			layout='fill'
+			objectFit='cover'
+			className='rounded-md'
+		/>
+	)
 
 	return (
 		<>
 			{slug ? (
 				clickable ? (
 					<Link href={`/posts/${slug}`}>
-						<a className='w-56 h-36' aria-label={title}>
+						<a className='w-56 h-56' aria-label={title}>
 							<div className='w-full h-full relative'>{image}</div>
 						</a>
 					</Link>
@@ -34,4 +57,4 @@ const Thumbnail: React.FC<Props> = ({ title, src, slug, clickable = false }: Pro
 	)
 }
 
-export default Thumbnail
+export default ImageComp

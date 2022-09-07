@@ -2,7 +2,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Layout from '../components/Layout'
-import RecipeCarousel from '../components/RecipeCarousel'
+import RecipeGrid from '../components/RecipeGrid'
 import { IRecipe } from '../types/recipe'
 import { SITE_NAME } from '../utils/constants'
 
@@ -11,7 +11,7 @@ type Props = {
 	recipes: IRecipe[]
 }
 
-const Home: React.FC<Props> = ({ recipes, errorCode }: Props) => {
+const Dashboard: React.FC<Props> = ({ recipes, errorCode }: Props) => {
 	return (
 		<>
 			<Layout>
@@ -23,13 +23,13 @@ const Home: React.FC<Props> = ({ recipes, errorCode }: Props) => {
 						<p>Sorry, something seems to be broken.</p>
 						<p>Status - {errorCode}</p>
 					</div>
-				)) || <RecipeCarousel recipes={recipes}></RecipeCarousel>}
+				)) || <RecipeGrid recipes={recipes}></RecipeGrid>}
 			</Layout>
 		</>
 	)
 }
 
-export default Home
+export default Dashboard
 
 export const getServerSideProps: GetStaticProps = async () => {
 	const data = await fetch(`${process.env.API_URL}/api/recipes?populate=*`)

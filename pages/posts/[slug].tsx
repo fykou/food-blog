@@ -8,6 +8,7 @@ import Ingredients from '../../components/Ingredients'
 import Layout from '../../components/Layout'
 import ImageComp from '../../components/ImageComp'
 import { IRecipe } from '../../types/recipe'
+import ReactMarkdown from 'react-markdown'
 
 type Props = {
 	errorCode: any
@@ -24,7 +25,7 @@ const components = {
 	Tips: dynamic(() => import('../../components/Tips')),
 }
 
-const ReactMarkdown = dynamic(() => import('react-markdown'), {})
+// const ReactMarkdown = dynamic(() => import('react-markdown'), {})
 
 const RecipePage: React.FC<Props> = ({ recipe, errorCode }: Props) => {
 	return (
@@ -51,11 +52,14 @@ const RecipePage: React.FC<Props> = ({ recipe, errorCode }: Props) => {
 					</a>
 				</div>
 			)) || (
-				<article className='prose prose-green'>
+				<article className='prose prose-green mx-auto'>
 					<div className='mb-4'>
 						<ImageComp
 							title={recipe.attributes.title!}
 							src={recipe.attributes.coverImage?.data?.attributes.url!}
+							formats={
+								recipe.attributes.coverImage?.data?.attributes.formats!
+							}
 						/>
 					</div>
 
@@ -110,28 +114,28 @@ export const getServerSideProps: GetStaticProps = async (context) => {
 	}
 }
 
-export const getServerSidePaths: GetStaticPaths = async ({ res }: any) => {
-	const data = await fetch(`${process.env.API_URL}/api/recipes?populate=*`)
+// export const getServerSidePaths: GetStaticPaths = async ({ res }: any) => {
+// 	const data = await fetch(`${process.env.API_URL}/api/recipes?populate=*`)
 
-	const errorCode = data.ok ? false : data.status
+// 	const errorCode = data.ok ? false : data.status
 
-	if (errorCode) {
-		res.status = errorCode
-		console.error(errorCode, data.statusText, 'on', data.url)
-	}
+// 	if (errorCode) {
+// 		res.status = errorCode
+// 		console.error(errorCode, data.statusText, 'on', data.url)
+// 	}
 
-	const json = await data.json()
+// 	const json = await data.json()
 
-	const recipes = json.data
+// 	const recipes = json.data
 
-	const paths = recipes.map((recipe: IRecipe) => ({
-		params: {
-			slug: recipe.attributes.slug,
-		},
-	}))
+// 	const paths = recipes.map((recipe: IRecipe) => ({
+// 		params: {
+// 			slug: recipe.attributes.slug,
+// 		},
+// 	}))
 
-	return {
-		paths,
-		fallback: false,
-	}
-}
+// 	return {
+// 		paths,
+// 		fallback: false,
+// 	}
+// }

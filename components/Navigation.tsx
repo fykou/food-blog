@@ -7,8 +7,8 @@ import { SITE_NAME } from '../utils/constants'
 
 const MenuItems: any = {
 	home: ['Home', '/'],
-	about: ['About', ''],
-	contact: ['Contact', ''],
+	about: ['About', '#'],
+	contact: ['Contact', '#'],
 }
 
 const navLinks = Object.keys(MenuItems).map((key) => (

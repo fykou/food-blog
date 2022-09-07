@@ -1,6 +1,6 @@
 // components/Tips.tsx
 type Props = {
-	tips: string[]
+	tips?: string[]
 }
 
 const Tips: React.FC<Props> = ({ tips }: Props) => {
@@ -8,7 +8,7 @@ const Tips: React.FC<Props> = ({ tips }: Props) => {
 		<>
 			<h2>Tips</h2>
 			<ul>
-				{tips.map((tip, index) => (
+				{tips?.map((tip, index) => (
 					<li key={index}>{tip}</li>
 				))}
 			</ul>

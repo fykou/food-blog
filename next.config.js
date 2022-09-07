@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	webpack5: false,
 	reactStrictMode: true,
 	images: {
+		deviceSizes: [320, 420, 768, 1024, 1200],
+		loader: 'default',
 		domains: [
 			'img.icons8.com',
 			'localhost',

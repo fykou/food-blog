@@ -5,7 +5,7 @@ import { ORGINIZATION, SITE_NAME, TWITTER_USERNAME } from '../utils/constants'
 
 export default function Footer() {
 	return (
-		<footer className='text-gray-600 body-font pt-8 bg-secondary'>
+		<footer className='text-gray-600 body-font pt-8 bg-secondary mt-auto'>
 			{/* Temp message */}
 			<div className='container px-5 mx-auto flex items-center justify-center flex-col'>
 				<p className='text-gray-400 text-center'>
