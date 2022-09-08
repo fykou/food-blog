@@ -6,7 +6,7 @@ type Props = {
 const Ingredients: React.FC<Props> = ({ ingredients }: Props) => {
 	return (
 		<>
-			<h2>Ingredients</h2>
+			<h2 className='mt-8'>Ingredients</h2>
 			<ul>
 				{ingredients.map((ingredient, index) => (
 					<li key={index}>{ingredient}</li>

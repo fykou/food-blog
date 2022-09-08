@@ -44,10 +44,10 @@ const Header: React.FC = () => {
 	useOutsideAlerter(dropdownRef)
 
 	return (
-		<div ref={dropdownRef} className=' shadow mb-8'>
+		<div ref={dropdownRef} className='prose-xl shadow mb-8'>
 			<Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 			{menuOpen && (
-				<nav className='p-4 flex flex-col space-y-3 md:hidden absolute w-full bg-white shadow-lg z-10'>
+				<nav className='p-4 flex flex-col space-y-3 lg:hidden absolute w-full bg-white shadow-lg z-10'>
 					{navLinks}
 					<div className='w-full'>
 						<Search />
@@ -59,7 +59,7 @@ const Header: React.FC = () => {
 }
 
 const Navbar = ({ menuOpen, setMenuOpen }: any) => (
-	<div className='flex items-center justify-between p-4'>
+	<div className='lg:container mx-auto flex items-center justify-between p-4'>
 		<div className='flex items-center'>
 			<Image
 				width={50}
@@ -73,9 +73,9 @@ const Navbar = ({ menuOpen, setMenuOpen }: any) => (
 				</a>
 			</Link>
 		</div>
-		<nav className='hidden md:block space-x-6'>{navLinks}</nav>
+		<nav className='hidden lg:block space-x-6'>{navLinks}</nav>
 
-		<div className='hidden md:block'>
+		<div className='hidden lg:block'>
 			<Search />
 		</div>
 
@@ -83,7 +83,7 @@ const Navbar = ({ menuOpen, setMenuOpen }: any) => (
 			type='button'
 			aria-label='Toggle mobile menu'
 			onClick={() => setMenuOpen(!menuOpen)}
-			className='rounded md:hidden focus:outline-none focus:ring focus:ring-gray-500 focus:ring-opacity-50'
+			className='rounded lg:hidden focus:outline-none focus:ring focus:ring-gray-500 focus:ring-opacity-50'
 		>
 			<Burger menuOpen={menuOpen} />
 		</button>
@@ -120,7 +120,7 @@ const Search = () => (
 
 		<input
 			type='text'
-			className='w-full py-2 pl-10 pr-4 text-gray-900 bg-gray-100 border border-gray-300 rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300'
+			className='w-full py-2 pl-10 pr-4 text-gray-900 bg-gray-100 border border-gray-300 rounded-lg focus:border-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300'
 			placeholder='Search'
 		/>
 	</div>

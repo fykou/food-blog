@@ -6,7 +6,7 @@ type Props = {
 	src: string
 	formats?: any
 	slug?: string
-	clickable?: boolean
+	className?: string
 }
 
 const ImageComp: React.FC<Props> = ({
@@ -14,7 +14,7 @@ const ImageComp: React.FC<Props> = ({
 	src,
 	slug,
 	formats,
-	clickable = false,
+	className,
 }: Props) => {
 	let imageurl = null
 
@@ -23,36 +23,21 @@ const ImageComp: React.FC<Props> = ({
 	} else {
 		imageurl = src ? `${src}` : '/placeholder.png'
 	}
-	let image = (
-		<Image
-			src={imageurl}
-			alt={`Cover Image for ${title}`}
-			blurDataURL={imageurl}
-			quality={40}
-			placeholder='blur'
-			layout='fill'
-			objectFit='cover'
-			className='rounded-md'
-		/>
-	)
 
 	return (
 		<>
-			{slug ? (
-				clickable ? (
-					<Link href={`/posts/${slug}`}>
-						<a className='w-56 h-56' aria-label={title}>
-							<div className='w-full h-full relative'>{image}</div>
-						</a>
-					</Link>
-				) : (
-					<a className='w-56 h-36' aria-label={title}>
-						<div className='w-full h-full relative'>{image}</div>
-					</a>
-				)
-			) : (
-				<div className='w-full h-96 relative'>{image}</div>
-			)}
+			<div className='w-full h-full relative'>
+				<Image
+					src={imageurl}
+					alt={`Cover Image for ${title}`}
+					blurDataURL={imageurl}
+					quality={40}
+					placeholder='blur'
+					layout='fill'
+					objectFit='cover'
+					className={className}
+				/>
+			</div>
 		</>
 	)
 }

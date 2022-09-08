@@ -9,6 +9,7 @@ import Layout from '../../components/Layout'
 import ImageComp from '../../components/ImageComp'
 import { IRecipe } from '../../types/recipe'
 import ReactMarkdown from 'react-markdown'
+import { Grid } from '@mantine/core'
 
 type Props = {
 	errorCode: any
@@ -52,39 +53,46 @@ const RecipePage: React.FC<Props> = ({ recipe, errorCode }: Props) => {
 					</a>
 				</div>
 			)) || (
-				<article className='prose prose-green mx-auto'>
-					<div className='mb-4'>
-						<ImageComp
-							title={recipe.attributes.title!}
-							src={recipe.attributes.coverImage?.data?.attributes.url!}
-							formats={
-								recipe.attributes.coverImage?.data?.attributes.formats!
-							}
-						/>
-					</div>
-
-					<h1 className='px-4'>{recipe.attributes.title}</h1>
-
-					<p className='font-bold px-4'>yield: {recipe.attributes.yields}</p>
-
-					<p className='px-4'>{recipe.attributes.description}</p>
-
-					<div className='bg-secondary'>
-						<div className='px-4'>
-							<Ingredients ingredients={recipe.attributes.ingredients} />
+				<article className='md:prose-xl prose-lg xl:container mx-auto'>
+					<div className='grid grid-cols-1 xl:grid-cols-2 gap-16 '>
+						<div className='h-[66vh]'>
+							<ImageComp
+								title={recipe.attributes.title!}
+								src={
+									recipe.attributes.coverImage?.data?.attributes.url!
+								}
+								formats={
+									recipe.attributes.coverImage?.data?.attributes
+										.formats!
+								}
+								className='xl:rounded-xl'
+							/>
 						</div>
-					</div>
+						<div>
+							<h1 className='px-4'>{recipe.attributes.title}</h1>
 
-					<div className='px-4'>
-						<Directions directions={recipe.attributes.directions} />
-					</div>
+							<p className='font-bold px-4'>
+								yield: {recipe.attributes.yields}
+							</p>
 
-					<div className='px-4'>
-						<components.Tips tips={recipe.attributes.tips} />
-					</div>
-					<div className='px-4'>
-						{/* eslint-disable-next-line react/no-children-prop */}
-						<ReactMarkdown children={recipe.attributes.other} />
+							<p className='px-4'>{recipe.attributes.description}</p>
+						</div>
+
+						<div className='bg-secondary'>
+							<div className='px-4'>
+								<Ingredients
+									ingredients={recipe.attributes.ingredients}
+								/>
+							</div>
+						</div>
+
+						<div className='px-4'>
+							<Directions directions={recipe.attributes.directions} />
+							<components.Tips tips={recipe.attributes.tips} />
+						</div>
+						<div className='m-16 prose-xl'>
+							<ReactMarkdown>{recipe.attributes.other}</ReactMarkdown>
+						</div>
 					</div>
 				</article>
 			)}

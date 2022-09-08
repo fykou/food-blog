@@ -7,7 +7,7 @@ const Tips: React.FC<Props> = ({ tips }: Props) => {
 	return (
 		<>
 			<h2>Tips</h2>
-			<ul>
+			<ul className='p-0 m-0'>
 				{tips?.map((tip, index) => (
 					<li key={index}>{tip}</li>
 				))}
