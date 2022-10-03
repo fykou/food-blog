@@ -9,29 +9,25 @@ type Props = {
 	className?: string
 }
 
-const ImageComp: React.FC<Props> = ({
-	title,
-	src,
-	slug,
-	formats,
-	className,
-}: Props) => {
-	let imageurl = null
+const ImageComp: React.FC<Props> = ({ title, src, slug, formats, className }: Props) => {
+	let largeimg = null
+	let smallimg = null
 
 	if (formats) {
-		imageurl = formats.small.url
+		largeimg = formats.large.url
+		smallimg = formats.small.url
 	} else {
-		imageurl = src ? `${src}` : '/placeholder.png'
+		largeimg = src ? `${src}` : '/placeholder.png'
 	}
 
 	return (
 		<>
 			<div className='w-full h-full relative'>
 				<Image
-					src={imageurl}
+					src={largeimg}
 					alt={`Cover Image for ${title}`}
-					blurDataURL={imageurl}
-					quality={40}
+					blurDataURL={smallimg}
+					quality={100}
 					placeholder='blur'
 					layout='fill'
 					objectFit='cover'
