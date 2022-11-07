@@ -2,7 +2,7 @@
 import { MantineProvider } from '@mantine/core'
 import Meta from '../components/Meta'
 import Footer from './Footer'
-import Header from './Navigation'
+import Navigation from './Navigation'
 
 type Props = {
 	children: React.ReactNode
@@ -14,7 +14,7 @@ const Layout: React.FC<Props> = ({ children, pageTitle }: Props) => {
 		<MantineProvider withGlobalStyles withNormalizeCSS>
 			<Meta pageTitle={pageTitle} />
 			<main className='min-h-screen flex flex-col'>
-				<Header />
+				<Navigation />
 
 				{children}
 				<Footer />

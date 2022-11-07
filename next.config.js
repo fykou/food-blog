@@ -9,6 +9,7 @@ const nextConfig = {
 			'localhost',
 			'em-strapi-bucket.s3.eu-north-1.amazonaws.com',
 			'res.cloudinary.com',
+			'dummyimage.com',
 		],
 	},
 	env: {

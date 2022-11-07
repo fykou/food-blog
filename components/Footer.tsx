@@ -3,19 +3,19 @@ import Image from 'next/image'
 
 import { ORGINIZATION, SITE_NAME, TWITTER_USERNAME } from '../utils/constants'
 
-export default function Footer() {
+type Props = {}
+
+export default function Footer(props: Props) {
 	return (
 		<footer className='text-gray-600 body-font pt-8 bg-secondary mt-auto'>
 			{/* Temp message */}
 			<div className='container px-5 mx-auto flex items-center justify-center flex-col'>
 				<p className='text-gray-400 text-center'>
-					This webpage is still under development and will recieve frequent
-					updates.
+					This webpage is still under development and will recieve frequent updates.
 				</p>
 				<p className='text-gray-400 text-center'>
 					Website or recipe suggestions? Send an email to{' '}
-					<a href='mailto: alex.hoeyby@gmail.com'>alex.hoeyby@gmail.com</a>{' '}
-					(Or tell Emily).
+					<a href='mailto: alex.hoeyby@gmail.com'>alex.hoeyby@gmail.com</a> (Or tell Emily).
 				</p>
 			</div>
 			{/* Temp message end*/}
@@ -80,14 +80,7 @@ export default function Footer() {
 							className='w-5 h-5'
 							viewBox='0 0 24 24'
 						>
-							<rect
-								width='20'
-								height='20'
-								x='2'
-								y='2'
-								rx='5'
-								ry='5'
-							></rect>
+							<rect width='20' height='20' x='2' y='2' rx='5' ry='5'></rect>
 							<path d='M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01'></path>
 						</svg>
 					</a>

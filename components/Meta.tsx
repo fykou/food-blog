@@ -4,13 +4,13 @@ import { useRouter } from 'next/router'
 
 import { SITE_URL, SITE_NAME, TWITTER_USERNAME } from '../utils/constants'
 
-type Props = {
-	pageTitle?: string
-}
-
 const meta = {
 	description: `${SITE_NAME} provides awesome food recipes.`,
 	ogImagePath: '/assets/card-image.webp',
+}
+
+type Props = {
+	pageTitle?: string
 }
 
 const Meta: React.FC<Props> = ({ pageTitle }: Props) => {
@@ -29,6 +29,9 @@ const Meta: React.FC<Props> = ({ pageTitle }: Props) => {
 			<link rel='manifest' href='/site.webmanifest' />
 			<link rel='mask-icon' href='/safari-pinned-tab.svg' color='#5bbad5' />
 			<link rel='shortcut icon' href='/favicon.ico' />
+			<link rel='preconnect' href='https://fonts.googleapis.com' />
+			<link rel='preconnect' href='https://fonts.gstatic.com' />
+			<link href='https://fonts.googleapis.com/css2?family=Lora&display=swap' rel='stylesheet' />
 			<meta name='msapplication-TileColor' content='#00a300' />
 			<meta name='msapplication-config' content='/browserconfig.xml' />
 			<meta name='theme-color' content='#fff' />
@@ -38,11 +41,7 @@ const Meta: React.FC<Props> = ({ pageTitle }: Props) => {
 			<meta property='og:type' content={ogType} />
 			<meta property='og:site_name' content={SITE_NAME} />
 			<meta property='og:title' content={ogTitle} />
-			<meta
-				property='og:description'
-				content={meta.description}
-				key='ogDescription'
-			/>
+			<meta property='og:description' content={meta.description} key='ogDescription' />
 			<meta property='og:image' content={ogImage} key='ogImage' />
 			<meta name='twitter:card' content='summary_large_image' />
 			<meta name='twitter:site' content={TWITTER_USERNAME} />
