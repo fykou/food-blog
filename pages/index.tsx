@@ -2,7 +2,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Layout from '../components/Layout'
-import RecipeGrid from '../components/RecipeGrid'
+import RecipePreview from '../components/RecipePreview'
 import { IRecipe } from '../types/recipe'
 import { SITE_NAME } from '../utils/constants'
 
@@ -18,12 +18,14 @@ const Dashboard: React.FC<Props> = ({ recipes, errorCode }: Props) => {
 				<Head>
 					<title>{SITE_NAME}</title>
 				</Head>
-				{(errorCode && (
-					<div className='mt-16 flex flex-col items-center'>
-						<p>Sorry, something seems to be broken.</p>
-						<p>Status - {errorCode}</p>
-					</div>
-				)) || <RecipeGrid recipes={recipes}></RecipeGrid>}
+				<div className='flex flex-col justify-center items-center text-m_text_dark font-serif'>
+					{(errorCode && (
+						<div className='mt-16 flex flex-col items-center'>
+							<p>Sorry, something seems to be broken.</p>
+							<p>Status - {errorCode}</p>
+						</div>
+					)) || <RecipePreview recipes={recipes}></RecipePreview>}
+				</div>
 			</Layout>
 		</>
 	)

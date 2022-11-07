@@ -9,7 +9,7 @@ type Props = {}
 export default function Footer(props: Props) {
 	return (
 		<footer className='mt-auto bg-m_primary flex justify-center items-center'>
-			<div className='w-full h-32 max-w-screen-laptop flex flex-col sm:flex-row items-center justify-between px-16 py-4 text-m_dark font-serif'>
+			<div className='w-full min-h-[6rem] max-w-screen-laptop flex flex-col sm:flex-row items-center justify-between px-16 py-4 text-m_dark font-serif'>
 				<a className='flex items-center text-xl'>{SITE_NAME}</a>
 
 				<p className='text-sm  sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2'>

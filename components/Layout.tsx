@@ -13,7 +13,7 @@ const Layout: React.FC<Props> = ({ children, pageTitle }: Props) => {
 	return (
 		<MantineProvider withGlobalStyles withNormalizeCSS>
 			<Meta pageTitle={pageTitle} />
-			<main className='min-h-screen flex flex-col'>
+			<main className='min-h-screen flex flex-col overflow-x-hidden'>
 				<Navigation />
 
 				{children}

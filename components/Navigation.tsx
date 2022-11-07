@@ -1,10 +1,8 @@
-// components/Header.tsx
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
 
 import { SITE_NAME } from '../utils/constants'
-import Search from './Search'
+import SearchField from './SearchField'
 
 const MenuItems: any = {
 	about: ['Recipes', '/'],
@@ -63,18 +61,22 @@ const Navigation: React.FC = (props: Props) => {
 
 const Navbar = ({ menuOpen, setMenuOpen }: any) => (
 	<>
-		<div className='w-full max-w-screen-laptop flex items-center justify-between px-16 py-4 text-m_dark font-serif'>
-			<nav className='hidden md:block space-x-6 text-center font-semibold text-lg lg:text-xl'>{navLinks}</nav>
+		<div className='w-full max-w-screen-laptop text-center flex items-center justify-between px-16 py-4 text-m_dark font-serif'>
+			<nav className='basis-0 flex-grow text-start hidden md:block space-x-6 font-semibold text-lg lg:text-xl'>
+				{navLinks}
+			</nav>
 
-			<div className='flex items-center'>
+			<div className='basis-0 flex-grow'>
 				{/* <Image width={50} height={50} alt='Logo' src='https://img.icons8.com/plasticine/100/000000/salad.png' /> */}
 				<Link href='/'>
 					<a className='text-2xl lg:text-3xl font-extrabold hover:text-m_text_dark_hover'>{SITE_NAME}</a>
 				</Link>
 			</div>
 
-			<div className='hidden md:block'>
-				<Search />
+			<div className='basis-0 flex-grow hidden md:block'>
+				<div className='ml-16'>
+					<SearchField />
+				</div>
 			</div>
 
 			<BurgerButton toggleState={menuOpen} onClick={setMenuOpen} />

@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {}
 
-export default function Search(props: Props) {
+export default function SearchField(props: Props) {
 	return (
 		<div className='relative'>
 			<span className='absolute inset-y-0 left-0 flex items-center pl-3'>
