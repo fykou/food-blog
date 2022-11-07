@@ -12,16 +12,14 @@ type Props = {
 
 const RecipesPage = ({ recipes, errorCode }: Props) => {
 	return (
-		<Layout>
-			<div className='flex flex-col justify-center items-center text-m_text_dark font-serif'>
-				{(errorCode && (
-					<div className='mt-16 flex flex-col items-center'>
-						<p>Sorry, something seems to be broken.</p>
-						<p>Status - {errorCode}</p>
-					</div>
-				)) || <RecipeGrid recipes={recipes}></RecipeGrid>}
-			</div>
-		</Layout>
+		<div className='flex flex-col justify-center items-center text-m_text_dark font-serif'>
+			{(errorCode && (
+				<div className='mt-16 flex flex-col items-center'>
+					<p>Sorry, something seems to be broken.</p>
+					<p>Status - {errorCode}</p>
+				</div>
+			)) || <RecipeGrid recipes={recipes}></RecipeGrid>}
+		</div>
 	)
 }
 

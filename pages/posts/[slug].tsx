@@ -26,17 +26,19 @@ const components = {
 	Tips: dynamic(() => import('../../components/Tips')),
 }
 
-// const ReactMarkdown = dynamic(() => import('react-markdown'), {})
-
 const RecipePage: React.FC<Props> = ({ recipe, errorCode }: Props) => {
+	if (errorCode) {
+		return (
+			<div className='mt-16 flex flex-col items-center'>
+				<p>Sorry, something seems to be broken.</p>
+				<p>Status - {errorCode}</p>
+			</div>
+		)
+	}
 	return (
-		<Layout pageTitle={recipe?.attributes.title || errorCode}>
+		<>
 			<Head>
-				<meta
-					name='description'
-					content={recipe?.attributes.description || errorCode}
-					key='description'
-				/>
+				<meta name='description' content={recipe?.attributes.description || errorCode} key='description' />
 				<meta
 					property='og:description'
 					content={recipe?.attributes.description || errorCode}
@@ -58,31 +60,22 @@ const RecipePage: React.FC<Props> = ({ recipe, errorCode }: Props) => {
 						<div className='h-[66vh]'>
 							<ImageComp
 								title={recipe.attributes.title!}
-								src={
-									recipe.attributes.coverImage?.data?.attributes.url!
-								}
-								formats={
-									recipe.attributes.coverImage?.data?.attributes
-										.formats!
-								}
+								src={recipe.attributes.coverImage?.data?.attributes.url!}
+								formats={recipe.attributes.coverImage?.data?.attributes.formats!}
 								className='xl:rounded-xl'
 							/>
 						</div>
 						<div>
 							<h1 className='px-4'>{recipe.attributes.title}</h1>
 
-							<p className='font-bold px-4'>
-								yield: {recipe.attributes.yields}
-							</p>
+							<p className='font-bold px-4'>yield: {recipe.attributes.yields}</p>
 
 							<p className='px-4'>{recipe.attributes.description}</p>
 						</div>
 
 						<div className='bg-secondary'>
 							<div className='px-4'>
-								<Ingredients
-									ingredients={recipe.attributes.ingredients}
-								/>
+								<Ingredients ingredients={recipe.attributes.ingredients} />
 							</div>
 						</div>
 
@@ -96,7 +89,7 @@ const RecipePage: React.FC<Props> = ({ recipe, errorCode }: Props) => {
 					</div>
 				</article>
 			)}
-		</Layout>
+		</>
 	)
 }
 
@@ -105,45 +98,21 @@ export default RecipePage
 export const getServerSideProps: GetStaticProps = async (context) => {
 	const { slug } = context.params as IParams
 
-	const data = await fetch(
-		`${process.env.API_URL}/api/recipes/?filters[slug]=${slug}&populate=*`
-	)
+	const data = await fetch(`${process.env.API_URL}/api/recipes/?filters[slug]=${slug}&populate=*`)
 
-	const errorCode = data.ok ? false : data.status
+	let errorCode = data.ok ? false : data.status
 	let recipe = null
 	if (errorCode) {
 		console.error(errorCode, data.statusText, 'on', data.url)
 	} else {
 		const json = await data.json()
-		recipe = json.data[0]
+		if (json.data.length > 0) {
+			recipe = json.data[0]
+		} else {
+			errorCode = 404
+		}
 	}
 	return {
 		props: { errorCode, recipe },
 	}
 }
-
-// export const getServerSidePaths: GetStaticPaths = async ({ res }: any) => {
-// 	const data = await fetch(`${process.env.API_URL}/api/recipes?populate=*`)
-
-// 	const errorCode = data.ok ? false : data.status
-
-// 	if (errorCode) {
-// 		res.status = errorCode
-// 		console.error(errorCode, data.statusText, 'on', data.url)
-// 	}
-
-// 	const json = await data.json()
-
-// 	const recipes = json.data
-
-// 	const paths = recipes.map((recipe: IRecipe) => ({
-// 		params: {
-// 			slug: recipe.attributes.slug,
-// 		},
-// 	}))
-
-// 	return {
-// 		paths,
-// 		fallback: false,
-// 	}
-// }
