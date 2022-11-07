@@ -2,7 +2,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { SITE_URL, SITE_NAME, TWITTER_USERNAME } from '../utils/constants'
+import { SITE_URL, SITE_NAME } from '../utils/constants'
 
 const meta = {
 	description: `${SITE_NAME} provides awesome food recipes.`,
@@ -43,8 +43,6 @@ const Meta: React.FC<Props> = ({ pageTitle }: Props) => {
 			<meta property='og:title' content={ogTitle} />
 			<meta property='og:description' content={meta.description} key='ogDescription' />
 			<meta property='og:image' content={ogImage} key='ogImage' />
-			<meta name='twitter:card' content='summary_large_image' />
-			<meta name='twitter:site' content={TWITTER_USERNAME} />
 		</Head>
 	)
 }
