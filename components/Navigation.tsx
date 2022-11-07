@@ -50,7 +50,7 @@ const Navigation: React.FC = (props: Props) => {
 		}, [ref])
 	}
 
-	const [menuOpen, setMenuOpen] = useState(true)
+	const [menuOpen, setMenuOpen] = useState(false)
 	const dropdownRef = useRef(null)
 	useOutsideAlerter(dropdownRef)
 
