@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 type Props = {
 	title: string
-	src: string
+	src: string | undefined
 	formats?: any
 	slug?: string
 	className?: string
@@ -28,7 +28,7 @@ const ImageComp: React.FC<Props> = ({ title, src, slug, formats, className }: Pr
 					alt={`Cover Image for ${title}`}
 					blurDataURL={smallimg}
 					quality={100}
-					placeholder='blur'
+					placeholder={smallimg ? 'blur' : 'empty'}
 					layout='fill'
 					objectFit='cover'
 					className={className}

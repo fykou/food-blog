@@ -1,29 +1,26 @@
 // pages/index.tsx
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import Layout from '../components/Layout'
+import CategoryPreview from '../components/CategoryPreview'
 import RecipePreview from '../components/RecipePreview'
-import { IRecipe } from '../types/recipe'
+import { GraphQLClient } from '../services/graphql'
+import { GET_RECIPES } from '../services/graphql/queries'
+import { GetRecipes } from '../services/graphql/__generated__/GetRecipes'
 import { SITE_NAME } from '../utils/constants'
 
 type Props = {
-	errorCode: any
-	recipes: IRecipe[]
+	recipes: GetRecipes
 }
 
-const Dashboard: React.FC<Props> = ({ recipes, errorCode }: Props) => {
+const Dashboard: React.FC<Props> = ({ recipes }: Props) => {
 	return (
 		<>
 			<Head>
 				<title>{SITE_NAME}</title>
 			</Head>
 			<div className='flex flex-col justify-center items-center text-m_text_dark font-serif'>
-				{(errorCode && (
-					<div className='mt-16 flex flex-col items-center'>
-						<p>Sorry, something seems to be broken.</p>
-						<p>Status - {errorCode}</p>
-					</div>
-				)) || <RecipePreview recipes={recipes}></RecipePreview>}
+				<RecipePreview props={recipes}></RecipePreview>
+				<CategoryPreview props={recipes}></CategoryPreview>
 			</div>
 		</>
 	)
@@ -32,17 +29,19 @@ const Dashboard: React.FC<Props> = ({ recipes, errorCode }: Props) => {
 export default Dashboard
 
 export const getServerSideProps: GetStaticProps = async () => {
-	const data = await fetch(`${process.env.API_URL}/api/recipes?populate=*`)
+	const client = GraphQLClient()
+	const response = await client.query({
+		query: GET_RECIPES,
+		variables: {
+			pagination: {
+				limit: 4,
+				start: 0,
+			},
+			sort: 'publishedAt:desc',
+		},
+	})
 
-	const errorCode = data.ok ? false : data.status
+	const recipes: GetRecipes = response?.data
 
-	if (errorCode) {
-		console.error(errorCode, data.statusText, 'on', data.url)
-	}
-
-	const json = await data.json()
-
-	const recipes = json.data
-
-	return { props: { errorCode, recipes } }
+	return { props: { recipes } }
 }
