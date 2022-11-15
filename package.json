@@ -10,9 +10,13 @@
 		"build": "next build",
 		"export": "next build && next export",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"schema:download": "npx apollo service:download --endpoint=http://localhost:1337/graphql ./services/graphql/graphql-schema.json",
+		"schema:generate": "npx apollo codegen:generate --localSchemaFile=./services/graphql/graphql-schema.json --includes=./services/graphql/* --target=typescript --tagName=gql --watch",
+		"schema:generate:ci": "npx apollo codegen:generate --localSchemaFile=./services/graphql/graphql-schema.json --includes=./services/graphql/* --target=typescript --tagName=gql"
 	},
 	"dependencies": {
+		"@apollo/client": "^3.7.1",
 		"@emotion/react": "^11.10.4",
 		"@mantine/core": "^5.2.6",
 		"@mantine/hooks": "^5.2.6",
@@ -25,10 +29,11 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/typography": "^0.5.7",
-		"@types/node": "^17.0.21",
-		"@types/react": "^17.0.39",
+		"@types/node": "^18.11.9",
+		"@types/react": "18.0.1",
 		"@types/react-dom": "^17.0.12",
 		"@types/react-slick": "^0.23.10",
+		"apollo": "^2.34.0",
 		"autoprefixer": "^10.4.8",
 		"cssnano": "^5.1.13",
 		"eslint": "^8.23.0",

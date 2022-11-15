@@ -7,10 +7,10 @@ type Props = {
 	props: GetRecipes
 }
 
-const RecipePreview = ({ props }: Props) => {
+const CategoryPreview = ({ props }: Props) => {
 	return (
 		<section className='w-full max-w-screen-laptop px-16 flex flex-col justify-center items-center mb-16'>
-			<h2 className='text-3xl bg-m_primary px-4 py-2 rounded-md'>Latest Recipes</h2>
+			<h2 className='text-3xl bg-m_primary px-4 py-2 rounded-md'>Categories</h2>
 			<div className='w-full flex flex-row space-6 space-x-6 flex-wrap justify-evenly mx-8 my-4 overflow-hidden h-[436px]'>
 				{props &&
 					props.recipes?.data.map((recipe) => (
@@ -53,4 +53,4 @@ const RecipePreview = ({ props }: Props) => {
 	)
 }
 
-export default RecipePreview
+export default CategoryPreview
