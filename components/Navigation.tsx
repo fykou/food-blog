@@ -53,7 +53,7 @@ const Navigation: React.FC = (props: Props) => {
 	useOutsideAlerter(dropdownRef)
 
 	return (
-		<div ref={dropdownRef} className='mb-16 flex flex-col justify-center items-center bg-m_primary'>
+		<div ref={dropdownRef} className='md:mb-16 flex flex-col justify-center items-center bg-m_primary'>
 			<Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 		</div>
 	)

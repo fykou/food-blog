@@ -66,3 +66,15 @@ export const GET_RECIPE = gql`
 		}
 	}
 `
+
+export const GET_CATEGORIES = gql`
+	query GetCategories {
+		categories {
+			data {
+				attributes {
+					Name
+				}
+			}
+		}
+	}
+`

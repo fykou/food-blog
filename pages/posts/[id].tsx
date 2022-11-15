@@ -22,7 +22,6 @@ type Props = {
 // }
 
 const RecipePage: React.FC<Props> = ({ recipe }: Props) => {
-	console.log(recipe)
 	return (
 		<>
 			<Head>
@@ -38,7 +37,7 @@ const RecipePage: React.FC<Props> = ({ recipe }: Props) => {
 				/>
 			</Head>
 
-			{(!recipe?.recipe?.data && (
+			{(!recipe.recipe?.data && (
 				<div className='mt-16 flex flex-col items-center'>
 					<p>Sorry, something seems to be broken.</p>
 					<a className='mt-8' href='\'>
@@ -46,25 +45,25 @@ const RecipePage: React.FC<Props> = ({ recipe }: Props) => {
 					</a>
 				</div>
 			)) || (
-				<article className='md:prose-xl prose-lg xl:container mx-auto'>
-					<div className='grid grid-cols-1 xl:grid-cols-2 gap-16 '>
-						<div className='h-[66vh]'>
+				<article className='max-w-screen-laptop mx-auto text-2xl md:mx-16'>
+					<div className='grid grid-cols-1 md:grid-cols-2 gap-16 '>
+						<div className='aspect-[3/4]'>
 							<ImageComp
 								title={recipe?.recipe?.data?.attributes?.title!}
 								src={recipe?.recipe?.data?.attributes?.coverImage?.data?.attributes?.url!}
 								formats={recipe?.recipe?.data?.attributes?.coverImage?.data?.attributes?.formats!}
-								className='xl:rounded-xl'
+								className='md:rounded-xl'
 							/>
 						</div>
-						<div>
-							<h1 className='px-4'>{recipe?.recipe?.data?.attributes?.title}</h1>
+						<div className='font-serif'>
+							<h2 className='py-4 text-4xl'>{recipe?.recipe?.data?.attributes?.title}</h2>
 
-							<p className='font-bold px-4'>yield: {recipe?.recipe?.data?.attributes?.yields}</p>
+							<p className='py-4 font-bold'>yield: {recipe?.recipe?.data?.attributes?.yields}</p>
 
-							<p className='px-4'>{recipe?.recipe?.data?.attributes?.description}</p>
+							<p className='py-4'>{recipe?.recipe?.data?.attributes?.description}</p>
 						</div>
 
-						<div className='bg-secondary'>
+						<div className='bg-m_secondary bg-opacity-25 rounded-lg'>
 							<div className='px-4'>
 								<Ingredients ingredients={recipe?.recipe?.data?.attributes?.ingredients} />
 							</div>

@@ -11,9 +11,12 @@ module.exports = {
 	darkMode: false, // or 'media' or 'class'
 	theme: {
 		extend: {
+			cursor: {
+				checkbox: 'url(pointer.png), pointer',
+			},
 			colors: {
 				m_text_dark: '#1A1A1A',
-				m_text_dark_hover: '#1A1A1A',
+				m_text_dark_hover: '#777777',
 				m_text_light: '#FFFFFF',
 				m_text_light_hover: '#FFFFFF',
 				m_dark: '#1D1B1E',
