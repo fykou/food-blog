@@ -1,5 +1,7 @@
 import { GetStaticProps } from 'next'
+import Head from 'next/head'
 import React from 'react'
+import Layout from '../components/Layout'
 import RecipeGrid from '../components/RecipeGrid'
 import { GraphQLClient } from '../services/graphql'
 import { GET_RECIPES } from '../services/graphql/queries'
@@ -11,9 +13,16 @@ type Props = {
 
 const RecipesPage = ({ recipes }: Props) => {
 	return (
-		<div className='flex flex-col justify-center items-center text-m_text_dark font-serif'>
-			<RecipeGrid props={recipes} />
-		</div>
+		<Layout>
+			<Head>
+				<title>Recipes | Emilys Kitchen</title>
+				<meta name='description' content='Recipe page for Emilys Kitchen' key='description' />
+				<meta property='og:description' content='Recipe page for Emilys Kitchen' key='ogDescription' />
+			</Head>
+			<div className='flex flex-col justify-center items-center text-m_text_dark font-serif'>
+				<RecipeGrid props={recipes} />
+			</div>
+		</Layout>
 	)
 }
 

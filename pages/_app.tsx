@@ -6,11 +6,9 @@ import '../styles/globals.css'
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 	const AnyComponent = Component as any
 	return (
-		<Layout>
-			<ApolloProviderWrapper>
-				<AnyComponent {...pageProps} />
-			</ApolloProviderWrapper>
-		</Layout>
+		<ApolloProviderWrapper>
+			<AnyComponent {...pageProps} />
+		</ApolloProviderWrapper>
 	)
 }
 

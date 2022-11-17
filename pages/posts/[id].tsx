@@ -10,6 +10,8 @@ import Tips from '../../components/Tips'
 import { GraphQLClient } from '../../services/graphql'
 import { GET_RECIPE } from '../../services/graphql/queries'
 import { GetRecipe } from '../../services/graphql/__generated__/GetRecipe'
+import Layout from '../../components/Layout'
+import IngredientSection from '../../components/IngredientSection'
 
 type Props = {
 	recipe: GetRecipe
@@ -23,8 +25,9 @@ type Props = {
 
 const RecipePage: React.FC<Props> = ({ recipe }: Props) => {
 	return (
-		<>
+		<Layout>
 			<Head>
+				<title>{recipe.recipe?.data?.attributes?.title} | Emilys Kitchen</title>
 				<meta
 					name='description'
 					content={recipe?.recipe?.data?.attributes?.description || ''}
@@ -37,51 +40,46 @@ const RecipePage: React.FC<Props> = ({ recipe }: Props) => {
 				/>
 			</Head>
 
-			{(!recipe.recipe?.data && (
-				<div className='mt-16 flex flex-col items-center'>
-					<p>Sorry, something seems to be broken.</p>
-					<a className='mt-8' href='\'>
-						Click here to go to the homepage
-					</a>
-				</div>
-			)) || (
-				<article className='max-w-screen-laptop mx-auto text-2xl md:mx-16'>
-					<div className='grid grid-cols-1 md:grid-cols-2 gap-16 '>
-						<div className='aspect-[3/4]'>
-							<ImageComp
-								title={recipe?.recipe?.data?.attributes?.title!}
-								src={recipe?.recipe?.data?.attributes?.coverImage?.data?.attributes?.url!}
-								formats={recipe?.recipe?.data?.attributes?.coverImage?.data?.attributes?.formats!}
-								className='md:rounded-xl'
-							/>
-						</div>
-						<div className='font-serif'>
-							<h2 className='py-4 text-4xl'>{recipe?.recipe?.data?.attributes?.title}</h2>
+			<article className='max-w-screen-laptop self-center md:mx-16 md:mt-8 mb-16'>
+				<div className='grid grid-cols-1 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.5fr)] grid-flow-row gap-8'>
+					<div className='aspect-[3/4]'>
+						<ImageComp
+							title={recipe?.recipe?.data?.attributes?.title!}
+							src={recipe?.recipe?.data?.attributes?.coverImage?.data?.attributes?.url!}
+							formats={recipe?.recipe?.data?.attributes?.coverImage?.data?.attributes?.formats!}
+							className='md:rounded-xl'
+						/>
+					</div>
+					<div className='font-serif whitespace-normal px-4 md:px-0'>
+						<h1 className='py-4'>{recipe?.recipe?.data?.attributes?.title}</h1>
 
-							<p className='py-4 font-bold'>yield: {recipe?.recipe?.data?.attributes?.yields}</p>
+						<p className='py-4'>{recipe?.recipe?.data?.attributes?.description}</p>
 
-							<p className='py-4'>{recipe?.recipe?.data?.attributes?.description}</p>
-						</div>
-
-						<div className='bg-m_secondary bg-opacity-25 rounded-lg'>
-							<div className='px-4'>
-								<Ingredients ingredients={recipe?.recipe?.data?.attributes?.ingredients} />
-							</div>
-						</div>
-
-						<div className='px-4'>
-							<Directions directions={recipe?.recipe?.data?.attributes?.directions} />
-							<Tips tips={recipe?.recipe?.data?.attributes?.tips} />
-						</div>
-						<div className='m-16 prose-xl'>
-							{recipe?.recipe?.data?.attributes?.other && (
-								<ReactMarkdown>{recipe?.recipe?.data?.attributes?.other}</ReactMarkdown>
+						<span className='py-4 font-bold'>
+							{recipe?.recipe?.data?.attributes?.Servings && (
+								<span className='py-4'>Servings: {recipe?.recipe?.data?.attributes?.Servings}</span>
 							)}
+						</span>
+					</div>
+
+					<div className='font-serif bg-m_secondary bg-opacity-25 rounded-lg md:sticky top-4'>
+						<div className='px-4'>
+							<IngredientSection sections={recipe?.recipe?.data?.attributes?.ingredientSection} />
 						</div>
 					</div>
-				</article>
-			)}
-		</>
+
+					<div className='font-serif px-4 md:px-0'>
+						<Directions directions={recipe?.recipe?.data?.attributes?.Directions} />
+					</div>
+					<div></div>
+					<div className='prose max-w-none whitespace-normal text-m_text_dark font-serif w-full px-4 md:px-0'>
+						{recipe?.recipe?.data?.attributes?.Extra && (
+							<ReactMarkdown>{recipe?.recipe?.data?.attributes?.Extra}</ReactMarkdown>
+						)}
+					</div>
+				</div>
+			</article>
+		</Layout>
 	)
 }
 

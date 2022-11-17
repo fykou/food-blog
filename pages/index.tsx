@@ -2,6 +2,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import CategoryPreview from '../components/CategoryPreview'
+import Layout from '../components/Layout'
 import RecipePreview from '../components/RecipePreview'
 import { GraphQLClient } from '../services/graphql'
 import { GET_CATEGORIES, GET_RECIPES } from '../services/graphql/queries'
@@ -15,15 +16,17 @@ type Props = {
 
 const Dashboard: React.FC<Props> = ({ latestRecipes }: Props) => {
 	return (
-		<>
+		<Layout>
 			<Head>
-				<title>{SITE_NAME}</title>
+				<title>Emilys Kitchen</title>
+				<meta name='description' content='Home page for Emilys Kitchen' key='description' />
+				<meta property='og:description' content='Home page for Emilys Kitchen' key='ogDescription' />
 			</Head>
 			<div className='flex flex-col justify-center items-center text-m_text_dark font-serif'>
-				<RecipePreview props={latestRecipes}></RecipePreview>
+				<RecipePreview recipeData={latestRecipes} className='w-full max-w-screen-laptop'></RecipePreview>
 				{/* <CategoryPreview props={latestRecipes}></CategoryPreview> */}
 			</div>
-		</>
+		</Layout>
 	)
 }
 

@@ -7,9 +7,27 @@
 // GraphQL query operation: GetCategories
 // ====================================================
 
+export interface GetCategories_categories_data_attributes_image_data_attributes {
+  __typename: "UploadFile";
+  url: string;
+  formats: any | null;
+  caption: string | null;
+}
+
+export interface GetCategories_categories_data_attributes_image_data {
+  __typename: "UploadFileEntity";
+  attributes: GetCategories_categories_data_attributes_image_data_attributes | null;
+}
+
+export interface GetCategories_categories_data_attributes_image {
+  __typename: "UploadFileEntityResponse";
+  data: GetCategories_categories_data_attributes_image_data | null;
+}
+
 export interface GetCategories_categories_data_attributes {
   __typename: "Category";
-  Name: string | null;
+  name: string;
+  image: GetCategories_categories_data_attributes_image | null;
 }
 
 export interface GetCategories_categories_data {

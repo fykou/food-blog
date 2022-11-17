@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 // Define queries here
 
 export const GET_RECIPES = gql`
-	query GetRecipes($pagination: PaginationArg, $sort: [String]) {
-		recipes(pagination: $pagination, sort: $sort) {
+	query GetRecipes($pagination: PaginationArg, $sort: [String], $filters: RecipeFiltersInput) {
+		recipes(pagination: $pagination, sort: $sort, filters: $filters) {
 			meta {
 				pagination {
 					total
@@ -14,15 +14,10 @@ export const GET_RECIPES = gql`
 				}
 			}
 			data {
+				id
 				attributes {
 					title
-					slug
 					description
-					directions
-					yields
-					ingredients
-					tips
-					other
 					publishedAt
 					coverImage {
 						data {
@@ -32,8 +27,19 @@ export const GET_RECIPES = gql`
 							}
 						}
 					}
+					tags {
+						data {
+							attributes {
+								tag
+							}
+							id
+						}
+					}
+					Link {
+						icon
+						url
+					}
 				}
-				id
 			}
 		}
 	}
@@ -45,13 +51,9 @@ export const GET_RECIPE = gql`
 			data {
 				attributes {
 					title
-					slug
 					description
-					directions
-					yields
-					ingredients
-					tips
-					other
+					Servings
+					Extra
 					publishedAt
 					coverImage {
 						data {
@@ -59,6 +61,41 @@ export const GET_RECIPE = gql`
 								url
 								formats
 							}
+						}
+					}
+					Directions {
+						direction
+						id
+					}
+					Link {
+						icon
+						id
+						url
+					}
+					tags {
+						data {
+							attributes {
+								tag
+							}
+							id
+						}
+					}
+					category {
+						data {
+							attributes {
+								name
+							}
+						}
+					}
+					ingredientSection {
+						id
+						Section
+						Ingredients {
+							id
+							ingredient
+							unit
+							optional
+							ammount
 						}
 					}
 				}
@@ -72,7 +109,74 @@ export const GET_CATEGORIES = gql`
 		categories {
 			data {
 				attributes {
-					Name
+					name
+					image {
+						data {
+							attributes {
+								url
+								formats
+								caption
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+`
+
+export const GET_ABOUT = gql`
+	query getAbout {
+		aboutPage {
+			data {
+				attributes {
+					profileName
+					description
+					profileDescription
+					coverImage {
+						data {
+							attributes {
+								url
+								formats
+								caption
+							}
+						}
+					}
+					profilePicture {
+						data {
+							attributes {
+								url
+								formats
+								caption
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+`
+
+export const GET_META = gql`
+	query getMeta {
+		meta {
+			data {
+				attributes {
+					siteName
+					orginization
+					socials {
+						id
+						icon
+						url
+					}
+					favicon {
+						data {
+							attributes {
+								url
+								formats
+							}
+						}
+					}
 				}
 			}
 		}

@@ -22,6 +22,7 @@ module.exports = {
 				m_dark: '#1D1B1E',
 				m_light: '#EDEFF1',
 				m_primary: '#D2DDBA',
+				m_primary_hover: '#e6f0d1',
 				m_secondary: '#BFAE8F',
 				m_tertiary: '#8A949D',
 				m_blue: '#6A7D97',

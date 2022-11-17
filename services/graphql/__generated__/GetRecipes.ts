@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { PaginationArg } from "./../../../__generated__/globalTypes";
+import { PaginationArg, RecipeFiltersInput, ENUM_COMPONENTSOCIALSSOCIAL_ICON } from "./../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: GetRecipes
@@ -38,24 +38,42 @@ export interface GetRecipes_recipes_data_attributes_coverImage {
   data: GetRecipes_recipes_data_attributes_coverImage_data | null;
 }
 
+export interface GetRecipes_recipes_data_attributes_tags_data_attributes {
+  __typename: "Tag";
+  tag: string | null;
+}
+
+export interface GetRecipes_recipes_data_attributes_tags_data {
+  __typename: "TagEntity";
+  attributes: GetRecipes_recipes_data_attributes_tags_data_attributes | null;
+  id: string | null;
+}
+
+export interface GetRecipes_recipes_data_attributes_tags {
+  __typename: "TagRelationResponseCollection";
+  data: GetRecipes_recipes_data_attributes_tags_data[];
+}
+
+export interface GetRecipes_recipes_data_attributes_Link {
+  __typename: "ComponentSocialsSocial";
+  icon: ENUM_COMPONENTSOCIALSSOCIAL_ICON | null;
+  url: string | null;
+}
+
 export interface GetRecipes_recipes_data_attributes {
   __typename: "Recipe";
   title: string | null;
-  slug: string;
   description: string | null;
-  directions: any | null;
-  yields: string | null;
-  ingredients: any | null;
-  tips: any | null;
-  other: string | null;
   publishedAt: any | null;
   coverImage: GetRecipes_recipes_data_attributes_coverImage | null;
+  tags: GetRecipes_recipes_data_attributes_tags | null;
+  Link: (GetRecipes_recipes_data_attributes_Link | null)[] | null;
 }
 
 export interface GetRecipes_recipes_data {
   __typename: "RecipeEntity";
-  attributes: GetRecipes_recipes_data_attributes | null;
   id: string | null;
+  attributes: GetRecipes_recipes_data_attributes | null;
 }
 
 export interface GetRecipes_recipes {
@@ -71,4 +89,5 @@ export interface GetRecipes {
 export interface GetRecipesVariables {
   pagination?: PaginationArg | null;
   sort?: (string | null)[] | null;
+  filters?: RecipeFiltersInput | null;
 }

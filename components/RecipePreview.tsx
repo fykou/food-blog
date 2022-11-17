@@ -2,39 +2,25 @@ import Link from 'next/link'
 import React from 'react'
 import ImageComp from './ImageComp'
 import { GetRecipes } from '../services/graphql/__generated__/GetRecipes'
+import RecipeVerticalPreview from './RecipeVerticalPreview'
 
 type Props = {
-	props: GetRecipes
+	recipeData: GetRecipes
+	className?: string
 }
 
-const RecipePreview = ({ props }: Props) => {
+const RecipePreview: React.FC<Props> = ({ recipeData, className }: Props) => {
 	return (
-		<section className='w-full max-w-screen-laptop px-16 flex flex-col justify-center items-center mb-16'>
-			<h2 className='text-3xl bg-m_primary px-4 py-2 rounded-md'>Latest Recipes</h2>
-			<div className='w-full flex flex-row space-6 space-x-6 flex-wrap justify-evenly mx-8 my-4 overflow-hidden h-[436px]'>
-				{props &&
-					props.recipes?.data.map((recipe) => (
-						<Link key={recipe.id} href={`/posts/${recipe.id}`}>
-							<a className='max-w-sm p-1'>
-								<div className='flex flex-col justify-center items-center truncate'>
-									<div className='w-64 h-96'>
-										<ImageComp
-											slug={recipe.attributes?.slug!}
-											title={recipe.attributes?.title!}
-											src={recipe.attributes?.coverImage?.data?.attributes?.url}
-											formats={recipe.attributes?.coverImage?.data?.attributes?.formats}
-											className='rounded-lg'
-										/>
-									</div>
-
-									<h3 className='max-w-[16rem] text-xl p-2 truncate'>{recipe.attributes?.title}</h3>
-								</div>
-							</a>
-						</Link>
+		<section className={`sm:px-8 flex flex-col items-center ${className}`}>
+			<h2 className='bg-m_primary px-4 py-2 m-8 rounded-md'>Latest Recipes</h2>
+			<div className='w-full flex flex-row flex-wrap justify-evenly gap-4 h-96 overflow-hidden'>
+				{recipeData &&
+					recipeData.recipes?.data.map((recipe) => (
+						<RecipeVerticalPreview key={recipe.id} recipe={recipe} showTags />
 					))}
 			</div>
 			<Link href={`/recipes`}>
-				<a className='flex flex-row justify-center items-center flex-nowrap self-end text-xl font-semibold'>
+				<a className='flex flex-row justify-center items-center flex-nowrap self-end font-semibold'>
 					See more
 					<svg
 						fill='none'

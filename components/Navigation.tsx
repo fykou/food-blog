@@ -4,6 +4,10 @@ import { useEffect, useRef, useState } from 'react'
 import { SITE_NAME } from '../utils/constants'
 import SearchField from './SearchField'
 
+type Props = {
+	className?: string
+}
+
 const MenuItems: any = {
 	about: ['Recipes', '/'],
 	contact: ['About', '/about'],
@@ -15,9 +19,7 @@ const navLinks = Object.keys(MenuItems).map((key) => (
 	</Link>
 ))
 
-type Props = {}
-
-const Navigation: React.FC = (props: Props) => {
+const Navigation: React.FC<Props> = ({ className }: Props) => {
 	function useOutsideAlerter(ref: { current: any }) {
 		useEffect(() => {
 			/**
@@ -53,7 +55,7 @@ const Navigation: React.FC = (props: Props) => {
 	useOutsideAlerter(dropdownRef)
 
 	return (
-		<div ref={dropdownRef} className='md:mb-16 flex flex-col justify-center items-center bg-m_primary'>
+		<div ref={dropdownRef} className={`flex flex-col justify-center items-center ${className}`}>
 			<Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 		</div>
 	)
@@ -61,15 +63,15 @@ const Navigation: React.FC = (props: Props) => {
 
 const Navbar = ({ menuOpen, setMenuOpen }: any) => (
 	<>
-		<div className='w-full max-w-screen-laptop text-center flex items-center justify-between px-16 py-4 text-m_dark font-serif'>
-			<nav className='basis-0 flex-grow text-start hidden md:block space-x-6 font-semibold text-lg lg:text-xl'>
-				{navLinks}
-			</nav>
+		<div className='w-full max-w-screen-laptop text-center flex items-center justify-between md:px-16 px-4 py-4 text-m_dark font-serif'>
+			<nav className='basis-0 flex-grow text-start hidden md:block space-x-6 font-semibold'>{navLinks}</nav>
 
 			<div className='basis-0 flex-grow'>
 				{/* <Image width={50} height={50} alt='Logo' src='https://img.icons8.com/plasticine/100/000000/salad.png' /> */}
 				<Link href='/'>
-					<a className='text-2xl lg:text-3xl font-extrabold hover:text-m_text_dark_hover'>{SITE_NAME}</a>
+					<a className='font-extrabold hover:text-m_text_dark_hover'>
+						<h2>{SITE_NAME}</h2>
+					</a>
 				</Link>
 			</div>
 
@@ -83,7 +85,7 @@ const Navbar = ({ menuOpen, setMenuOpen }: any) => (
 		</div>
 		{menuOpen && (
 			<div className='w-full'>
-				<nav className='md:hidden w-full border-t border-opacity-20 border-black p-4 flex flex-col space-y-3 text-center font-semibold text-lg absolute bg-m_primary shadow-lg z-10'>
+				<nav className='md:hidden w-full border-t border-opacity-20 border-black p-4 flex flex-col space-y-3 text-center font-semibold absolute bg-m_primary shadow-lg z-10'>
 					{navLinks}
 					{/* <div className='w-full'>
                         <Search />

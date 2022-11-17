@@ -4,15 +4,19 @@ import Image from 'next/image'
 import { ORGINIZATION, SITE_NAME, INSTAGRAM_USERNAME } from '../utils/constants'
 import Link from 'next/link'
 
-type Props = {}
+type Props = {
+	className?: string
+}
 
-export default function Footer(props: Props) {
+const Footer: React.FC<Props> = ({ className }: Props) => {
 	return (
-		<footer className='mt-auto bg-m_primary flex justify-center items-center'>
-			<div className='w-full min-h-[6rem] max-w-screen-laptop flex flex-col sm:flex-row items-center justify-between px-16 py-4 text-m_dark font-serif'>
-				<a className='flex items-center text-xl'>{SITE_NAME}</a>
+		<footer className={`mt-auto flex justify-center items-center ${className}`}>
+			<div className='w-full min-h-[5rem] max-w-screen-laptop flex flex-col sm:flex-row items-center justify-between px-16 py-4 text-m_dark font-serif'>
+				<a className='flex items-center'>
+					<h3>{SITE_NAME}</h3>
+				</a>
 
-				<p className='text-sm  sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2'>
+				<p className='sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 text-xs'>
 					© {new Date().getFullYear()} {ORGINIZATION}
 				</p>
 
@@ -38,3 +42,5 @@ export default function Footer(props: Props) {
 		</footer>
 	)
 }
+
+export default Footer

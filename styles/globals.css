@@ -14,3 +14,23 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+p, li, a, button, input, textarea, select, label, span, div, td, th, tr, table {
+    font-size: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 2;
+}
+
+h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem
+}
+
