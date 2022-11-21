@@ -33,7 +33,7 @@ const Dashboard: React.FC<Props> = (props: Props) => {
 				<meta name='description' content='Home page for Emilys Kitchen' key='description' />
 				<meta property='og:description' content='Home page for Emilys Kitchen' key='ogDescription' />
 			</Head>
-			<div className='flex flex-col w-full max-w-screen-laptop justify-center items-center text-m_text_dark font-serif'>
+			<div className='flex flex-col mx-auto w-full max-w-screen-laptop justify-center items-center text-m_text_dark font-serif'>
 				{props.recipeResponse.error ? (
 					<ErrorComponent error={props.recipeResponse.error} />
 				) : (
