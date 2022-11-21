@@ -53,6 +53,7 @@ export const GET_RECIPE = gql`
 					title
 					description
 					Servings
+					servingUnit
 					Extra
 					publishedAt
 					coverImage {
@@ -83,7 +84,7 @@ export const GET_RECIPE = gql`
 					category {
 						data {
 							attributes {
-								name
+								title
 							}
 						}
 					}
@@ -108,9 +109,10 @@ export const GET_CATEGORIES = gql`
 	query GetCategories {
 		categories {
 			data {
+				id
 				attributes {
-					name
-					image {
+					title
+					coverImage {
 						data {
 							attributes {
 								url

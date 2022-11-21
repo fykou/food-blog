@@ -56,7 +56,7 @@ export interface GetRecipe_recipe_data_attributes_tags {
 
 export interface GetRecipe_recipe_data_attributes_category_data_attributes {
   __typename: "Category";
-  name: string;
+  title: string;
 }
 
 export interface GetRecipe_recipe_data_attributes_category_data {
@@ -90,6 +90,7 @@ export interface GetRecipe_recipe_data_attributes {
   title: string | null;
   description: string | null;
   Servings: number | null;
+  servingUnit: string | null;
   Extra: string | null;
   publishedAt: any | null;
   coverImage: GetRecipe_recipe_data_attributes_coverImage | null;

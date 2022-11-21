@@ -10,7 +10,7 @@ type Props = {
 
 const Footer: React.FC<Props> = ({ className }: Props) => {
 	return (
-		<footer className={`mt-auto flex justify-center items-center ${className}`}>
+		<footer className={`flex w-screen ${className}`}>
 			<div className='w-full min-h-[5rem] max-w-screen-laptop flex flex-col sm:flex-row items-center justify-between px-16 py-4 text-m_dark font-serif'>
 				<a className='flex items-center'>
 					<h3>{SITE_NAME}</h3>

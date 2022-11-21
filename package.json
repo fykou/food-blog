@@ -11,7 +11,7 @@
 		"export": "next build && next export",
 		"start": "next start",
 		"lint": "next lint",
-		"schema:download": "npx apollo service:download --endpoint=https://admin.emilyk.no/graphql ./services/graphql/graphql-schema.json",
+		"schema:download": "npx apollo service:download --endpoint=http://localhost:1337/graphql ./services/graphql/graphql-schema.json",
 		"schema:generate": "npx apollo codegen:generate --localSchemaFile=./services/graphql/graphql-schema.json --includes=./services/graphql/* --target=typescript --tagName=gql --watch",
 		"schema:generate:ci": "npx apollo codegen:generate --localSchemaFile=./services/graphql/graphql-schema.json --includes=./services/graphql/* --target=typescript --tagName=gql"
 	},

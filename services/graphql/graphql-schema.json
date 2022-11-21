@@ -6528,7 +6528,7 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "title",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -6620,7 +6620,7 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "name",
+            "name": "title",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6632,7 +6632,7 @@
             "deprecationReason": null
           },
           {
-            "name": "image",
+            "name": "coverImage",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6655,7 +6655,7 @@
         "specifiedByUrl": null,
         "fields": [
           {
-            "name": "name",
+            "name": "title",
             "description": null,
             "args": [],
             "type": {
@@ -6671,7 +6671,7 @@
             "deprecationReason": null
           },
           {
-            "name": "image",
+            "name": "coverImage",
             "description": null,
             "args": [],
             "type": {
@@ -7289,6 +7289,18 @@
             "deprecationReason": null
           },
           {
+            "name": "servingUnit",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilterInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -7595,6 +7607,18 @@
                 "name": "ComponentSocialsSocialInput",
                 "ofType": null
               }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "servingUnit",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -8007,6 +8031,18 @@
                 "name": "ComponentSocialsSocial",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "servingUnit",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null

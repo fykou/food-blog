@@ -54,7 +54,7 @@ export interface BooleanFilterInput {
 
 export interface CategoryFiltersInput {
   id?: IDFilterInput | null;
-  name?: StringFilterInput | null;
+  title?: StringFilterInput | null;
   createdAt?: DateTimeFilterInput | null;
   updatedAt?: DateTimeFilterInput | null;
   and?: (CategoryFiltersInput | null)[] | null;
@@ -240,6 +240,7 @@ export interface RecipeFiltersInput {
   tags?: TagFiltersInput | null;
   ingredientSection?: ComponentRecipeDataIngredientSectionFiltersInput | null;
   Link?: ComponentSocialsSocialFiltersInput | null;
+  servingUnit?: StringFilterInput | null;
   createdAt?: DateTimeFilterInput | null;
   updatedAt?: DateTimeFilterInput | null;
   publishedAt?: DateTimeFilterInput | null;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { GetRecipe_recipe_data_attributes_Directions } from '../services/graphql/__generated__/GetRecipe'
+import { GetRecipe_recipe_data_attributes_Directions } from '../../services/graphql/__generated__/GetRecipe'
 
 // components/Directions.tsx
 type Props = {
@@ -12,9 +12,9 @@ type Direction = {
 	id: number
 }
 
-const Directions: React.FC<Props> = ({ directions }: Props) => {
+const Directions: React.FC<Props> = (props: Props) => {
 	const [directionsList, setDirectionsList] = useState<Direction[]>(
-		directions?.map((directionData, index) => ({
+		props.directions?.map((directionData, index) => ({
 			directionData,
 			completed: false,
 			id: index,
@@ -27,8 +27,10 @@ const Directions: React.FC<Props> = ({ directions }: Props) => {
 		setDirectionsList(newDirectionsList)
 	}
 
+	if (!props.directions) return <div />
+
 	return (
-		<>
+		<div className='font-serif px-4 md:px-0'>
 			<h2>Directions</h2>
 			<ol role='list' className='list-decimal pl-6 whitespace-normal'>
 				{directionsList.map((direction, index) => (
@@ -41,7 +43,7 @@ const Directions: React.FC<Props> = ({ directions }: Props) => {
 					</li>
 				))}
 			</ol>
-		</>
+		</div>
 	)
 }
 

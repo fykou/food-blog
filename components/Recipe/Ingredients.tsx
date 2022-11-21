@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { GetRecipe_recipe_data_attributes_ingredientSection_Ingredients } from '../services/graphql/__generated__/GetRecipe'
+import { GetRecipe_recipe_data_attributes_ingredientSection_Ingredients } from '../../services/graphql/__generated__/GetRecipe'
 
 // components/Ingredients.tsx
 type Props = {

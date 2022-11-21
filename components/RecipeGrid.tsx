@@ -27,7 +27,7 @@ const RecipeGrid = ({ props }: Props) => {
 		>
 			{props &&
 				props.recipes?.data.map((recipe) => (
-					<Link key={recipe.id} href={`/posts/${recipe.id}`}>
+					<Link key={recipe.id} href={`/recipes/${recipe.id}`}>
 						<a className='text-gray-600 max-w-sm body-font p-4 m-4'>
 							<div className='flex flex-col justify-center items-center'>
 								<div className='w-64 h-96'>

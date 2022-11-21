@@ -12,10 +12,10 @@ const Layout: React.FC<Props> = ({ children, pageTitle }: Props) => {
 	return (
 		<>
 			<Meta pageTitle={pageTitle} />
-			<main className='min-h-screen flex flex-col whitespace-nowrap'>
+			<main className='min-h-screen flex flex-col whitespace-nowrap overflow-clip'>
 				<Navigation className='bg-m_primary' />
-				{children}
-				<Footer className='bg-m_primary' />
+				<div className='flex flex-col grow'>{children}</div>
+				<Footer className='bg-m_primary bottom-0' />
 			</main>
 		</>
 	)

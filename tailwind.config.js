@@ -25,6 +25,7 @@ module.exports = {
 				m_primary_hover: '#e6f0d1',
 				m_secondary: '#BFAE8F',
 				m_tertiary: '#8A949D',
+				m_tertiary_hover: '#AAB4BD',
 				m_blue: '#6A7D97',
 			},
 			fontFamily: {
