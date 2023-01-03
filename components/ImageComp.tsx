@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 
 type Props = {
 	title: string
@@ -29,8 +28,8 @@ const ImageComp: React.FC<Props> = ({ title, src, slug, formats, className }: Pr
 					blurDataURL={smallimg}
 					quality={100}
 					placeholder={smallimg ? 'blur' : 'empty'}
-					layout='fill'
-					objectFit='cover'
+					fill
+					style={{ objectFit: 'cover' }}
 					className={className}
 				/>
 			</div>

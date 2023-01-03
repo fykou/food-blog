@@ -31,7 +31,6 @@ const Meta: React.FC<Props> = ({ pageTitle }: Props) => {
 			<link rel='shortcut icon' href='/favicon.ico' />
 			<link rel='preconnect' href='https://fonts.googleapis.com' />
 			<link rel='preconnect' href='https://fonts.gstatic.com' />
-			<link href='https://fonts.googleapis.com/css2?family=Lora&display=swap' rel='stylesheet' />
 			<meta name='msapplication-TileColor' content='#00a300' />
 			<meta name='msapplication-config' content='/browserconfig.xml' />
 			<meta name='theme-color' content='#fff' />

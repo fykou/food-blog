@@ -1,6 +1,4 @@
-import gql from 'graphql-tag'
-
-// Define queries here
+import { gql } from '@apollo/client'
 
 export const GET_RECIPES = gql`
 	query GetRecipes($pagination: PaginationArg, $sort: [String], $filters: RecipeFiltersInput) {
@@ -14,9 +12,8 @@ export const GET_RECIPES = gql`
 				}
 			}
 			data {
-				id
 				attributes {
-					title
+					name
 					description
 					publishedAt
 					coverImage {
@@ -35,11 +32,13 @@ export const GET_RECIPES = gql`
 							id
 						}
 					}
-					Link {
+					socialLinks {
 						icon
 						url
+						id
 					}
 				}
+				id
 			}
 		}
 	}
@@ -50,11 +49,10 @@ export const GET_RECIPE = gql`
 		recipe(id: $id) {
 			data {
 				attributes {
-					title
+					name
 					description
-					Servings
-					servingUnit
-					Extra
+					servings
+					extra
 					publishedAt
 					coverImage {
 						data {
@@ -64,14 +62,10 @@ export const GET_RECIPE = gql`
 							}
 						}
 					}
-					Directions {
-						direction
-						id
-					}
-					Link {
+					socialLinks {
 						icon
-						id
 						url
+						id
 					}
 					tags {
 						data {
@@ -84,21 +78,31 @@ export const GET_RECIPE = gql`
 					category {
 						data {
 							attributes {
-								title
+								name
 							}
 						}
 					}
-					ingredientSection {
+					ingredientsSection {
 						id
-						Section
-						Ingredients {
+						section
+						ingredients {
+							amount
 							id
 							ingredient
-							unit
 							optional
-							ammount
+							unit
 						}
 					}
+					directionsSection {
+						id
+						section
+						directions {
+							simpleName
+							id
+							direction
+						}
+					}
+					servingUnit
 				}
 			}
 		}
@@ -111,12 +115,11 @@ export const GET_CATEGORIES = gql`
 			data {
 				id
 				attributes {
-					title
+					name
 					coverImage {
 						data {
 							attributes {
 								url
-								formats
 								caption
 							}
 						}
@@ -165,7 +168,7 @@ export const GET_META = gql`
 			data {
 				attributes {
 					siteName
-					orginization
+					organization
 					socials {
 						id
 						icon

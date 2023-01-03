@@ -6,16 +6,16 @@ import React from 'react'
 import ErrorComponent from '../components/ErrorComponent'
 import Layout from '../components/Layout'
 import RecipeGrid from '../components/RecipeGrid'
-import { GraphQLClient } from '../services/graphql'
+import { MyApolloClient } from '../services/graphql'
+import { RecipeEntityResponseCollection } from '../services/graphql-types'
 import { GET_RECIPES } from '../services/graphql/queries'
-import { GetRecipes } from '../services/graphql/__generated__/GetRecipes'
 
 type Props = {
 	recipeResponse: RecipeResponse
 }
 
 type RecipeResponse = {
-	recipeData: GetRecipes
+	recipeData: RecipeEntityResponseCollection
 	error?: ApolloError
 }
 
@@ -55,9 +55,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const tagFilter = tag ? { tags: { tag: { eq: `${tag}` } } } : {}
 	const filter = { ...categoryFilter, ...tagFilter }
 
-	console.log(filter)
-
-	const client = GraphQLClient()
+	const client = MyApolloClient()
 	let error: ApolloError | null = null
 	const recipeResponse = await client
 		.query({
@@ -71,11 +69,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 			},
 		})
 		.catch((err) => {
-			console.log(err)
 			error = JSON.parse(JSON.stringify(err))
 		})
 
-	const recipeData: GetRecipes = recipeResponse?.data || null
+	const recipeData: RecipeEntityResponseCollection = recipeResponse?.data.recipes || null
 
 	return {
 		props: {

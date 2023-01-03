@@ -3,19 +3,19 @@ import Image from 'next/image'
 import Layout from '../components/Layout'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
-import { GraphQLClient } from '../services/graphql'
+import { MyApolloClient } from '../services/graphql'
 import { GET_ABOUT } from '../services/graphql/queries'
-import { getAbout } from '../services/graphql/__generated__/getAbout'
 import ImageComp from '../components/ImageComp'
 import { ApolloError } from '@apollo/client'
 import ErrorComponent from '../components/ErrorComponent'
+import { AboutPageEntity, AboutPageEntityResponse } from '../services/graphql-types'
 
 type Props = {
-	aboutResponse: aboutResponse
+	aboutResponse: AboutResponse
 }
 
-type aboutResponse = {
-	aboutData: getAbout
+type AboutResponse = {
+	aboutData: AboutPageEntityResponse
 	error: ApolloError | null
 }
 
@@ -34,16 +34,15 @@ const about: React.FC<Props> = (props: Props) => {
 						<div className='rounded-lg h-64 overflow-hidden'>
 							<ImageComp
 								title={
-									props.aboutResponse?.aboutData.aboutPage?.data?.attributes?.coverImage?.data
-										?.attributes?.caption!
+									props.aboutResponse?.aboutData.data?.attributes?.coverImage?.data?.attributes
+										?.caption!
 								}
 								src={
-									props.aboutResponse?.aboutData.aboutPage?.data?.attributes?.coverImage?.data
-										?.attributes?.url!
+									props.aboutResponse?.aboutData.data?.attributes?.coverImage?.data?.attributes?.url!
 								}
 								formats={
-									props.aboutResponse?.aboutData.aboutPage?.data?.attributes?.coverImage?.data
-										?.attributes?.formats!
+									props.aboutResponse?.aboutData.data?.attributes?.coverImage?.data?.attributes
+										?.formats!
 								}
 							/>
 						</div>
@@ -52,32 +51,32 @@ const about: React.FC<Props> = (props: Props) => {
 								<div className='w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400'>
 									<ImageComp
 										title={
-											props.aboutResponse?.aboutData.aboutPage?.data?.attributes?.profilePicture
-												?.data?.attributes?.caption!
+											props.aboutResponse?.aboutData.data?.attributes?.profilePicture?.data
+												?.attributes?.caption!
 										}
 										src={
-											props.aboutResponse?.aboutData.aboutPage?.data?.attributes?.profilePicture
-												?.data?.attributes?.url!
+											props.aboutResponse?.aboutData.data?.attributes?.profilePicture?.data
+												?.attributes?.url!
 										}
 										formats={
-											props.aboutResponse?.aboutData.aboutPage?.data?.attributes?.profilePicture
-												?.data?.attributes?.formats!
+											props.aboutResponse?.aboutData.data?.attributes?.profilePicture?.data
+												?.attributes?.formats!
 										}
 									/>
 								</div>
 								<div className='flex flex-col items-center text-center justify-center'>
 									<h2 className='font-medium title-font mt-4 text-gray-900'>
-										{props.aboutResponse?.aboutData.aboutPage?.data?.attributes?.profileName}
+										{props.aboutResponse?.aboutData.data?.attributes?.profileName}
 									</h2>
 									<div className='w-12 h-1 bg-indigo-500 rounded mt-2 mb-4'></div>
 									<p className='text-base'>
-										{props.aboutResponse?.aboutData.aboutPage?.data?.attributes?.profileDescription}
+										{props.aboutResponse?.aboutData.data?.attributes?.profileDescription}
 									</p>
 								</div>
 							</div>
 							<div className='sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left'>
 								<p className='leading-relaxed mb-4'>
-									{props.aboutResponse?.aboutData.aboutPage?.data?.attributes?.description}
+									{props.aboutResponse?.aboutData.data?.attributes?.description}
 								</p>
 							</div>
 						</div>
@@ -91,18 +90,18 @@ const about: React.FC<Props> = (props: Props) => {
 export default about
 
 export const getServerSideProps: GetStaticProps = async () => {
-	const client = GraphQLClient()
+	const client = MyApolloClient()
 	let error: ApolloError | null = null
 	const aboutResponse = await client
 		.query({
 			query: GET_ABOUT,
 		})
 		.catch((err) => {
-			console.log(err)
+			console.error(err)
 			error = JSON.parse(JSON.stringify(err))
 		})
 
-	const aboutData: getAbout = aboutResponse?.data || null
+	const aboutData: AboutPageEntityResponse = aboutResponse?.data.aboutPage
 
 	return {
 		props: {

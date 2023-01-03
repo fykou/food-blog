@@ -36,10 +36,8 @@ const RecipeVerticalPreview: React.FC<Props> = (props: Props) => {
 		<div className={`${className} flex flex-col w-60`}>
 			<div>
 				{props.href ? (
-					<Link href={props.href}>
-						<a>
-							<ImagePreview {...props} />
-						</a>
+					<Link href={props.href} passHref>
+						<ImagePreview {...props} />
 					</Link>
 				) : (
 					<ImagePreview {...props} />
@@ -50,13 +48,12 @@ const RecipeVerticalPreview: React.FC<Props> = (props: Props) => {
 				{props.showTags &&
 					typeGuard<GetRecipes_recipes_data>(props.recipe, 'attributes') &&
 					props.recipe.attributes?.tags?.data.map((tag) => (
-						<Link href={`/recipes?tag=${tag.attributes?.tag}`} key={tag.id}>
-							<a
-								className='border rounded-md text-xs bg-m_primary hover:bg-m_primary_hover px-1 truncate cursor-pointer'
-								key={tag.id}
-							>
-								{tag.attributes?.tag}
-							</a>
+						<Link
+							href={`/recipes?tag=${tag.attributes?.tag}`}
+							key={tag.id}
+							className='border rounded-md text-xs bg-m_primary hover:bg-m_primary_hover px-1 truncate cursor-pointer'
+						>
+							{tag.attributes?.tag}
 						</Link>
 					))}
 			</div>

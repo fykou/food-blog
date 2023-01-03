@@ -5,10 +5,9 @@ import Head from 'next/head'
 import ErrorComponent from '../components/ErrorComponent'
 import Layout from '../components/Layout'
 import MainPageSection from '../components/MainPageSection'
-import { GraphQLClient } from '../services/graphql'
+import { MyApolloClient } from '../services/graphql'
+import { CategoryEntityResponseCollection, RecipeEntityResponseCollection } from '../services/graphql-types'
 import { GET_CATEGORIES, GET_RECIPES } from '../services/graphql/queries'
-import { GetCategories } from '../services/graphql/__generated__/GetCategories'
-import { GetRecipes } from '../services/graphql/__generated__/GetRecipes'
 
 type Props = {
 	recipeResponse: RecipeResponse
@@ -16,12 +15,12 @@ type Props = {
 }
 
 type RecipeResponse = {
-	recipeData: GetRecipes
+	recipeData: RecipeEntityResponseCollection
 	error?: ApolloError
 }
 
 type CategoryResponse = {
-	categoryData: GetCategories
+	categoryData: CategoryEntityResponseCollection
 	error?: ApolloError
 }
 
@@ -37,13 +36,13 @@ const Dashboard: React.FC<Props> = (props: Props) => {
 				{props.recipeResponse.error ? (
 					<ErrorComponent error={props.recipeResponse.error} />
 				) : (
-					<MainPageSection previewData={props.recipeResponse.recipeData} />
+					<MainPageSection previewData={props.recipeResponse.recipeData.data} />
 				)}
-				{props.categoriesResponse.error ? (
+				{/* {props.categoriesResponse.error ? (
 					<ErrorComponent error={props.categoriesResponse.error} />
 				) : (
-					<MainPageSection previewData={props.categoriesResponse.categoryData} />
-				)}
+					<MainPageSection previewData={props.categoriesResponse.categoryData.data} />
+				)} */}
 			</div>
 		</Layout>
 	)
@@ -52,7 +51,7 @@ const Dashboard: React.FC<Props> = (props: Props) => {
 export default Dashboard
 
 export const getServerSideProps: GetStaticProps = async () => {
-	const client = GraphQLClient()
+	const client = MyApolloClient()
 	let recipesError: ApolloError | undefined
 	let categoryError: ApolloError | undefined
 	const recipesResponse = await client
@@ -67,7 +66,7 @@ export const getServerSideProps: GetStaticProps = async () => {
 			},
 		})
 		.catch((err) => {
-			console.log(err)
+			console.error(err)
 			recipesError = JSON.parse(JSON.stringify(err))
 		})
 
@@ -76,12 +75,12 @@ export const getServerSideProps: GetStaticProps = async () => {
 			query: GET_CATEGORIES,
 		})
 		.catch((err) => {
-			console.log(err)
+			console.error(err)
 			categoryError = JSON.parse(JSON.stringify(err))
 		})
 
-	const recipeData: GetRecipes = recipesResponse?.data || null
-	const categoryData: GetCategories = categoryResponse?.data || null
+	const recipeData: RecipeEntityResponseCollection = recipesResponse?.data.recipes || null
+	const categoryData: CategoryEntityResponseCollection = categoryResponse?.data.categories || null
 
 	return {
 		props: {

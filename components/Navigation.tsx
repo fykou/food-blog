@@ -14,8 +14,8 @@ const MenuItems: any = {
 }
 
 const navLinks = Object.keys(MenuItems).map((key) => (
-	<Link href={MenuItems[key][1]} key={key}>
-		<a className='w-full hover:text-m_text_dark_hover'>{MenuItems[key][0]}</a>
+	<Link href={MenuItems[key][1]} key={key} className='w-full hover:text-m_text_dark_hover'>
+		{MenuItems[key][0]}
 	</Link>
 ))
 
@@ -68,10 +68,8 @@ const Navbar = ({ menuOpen, setMenuOpen }: any) => (
 
 			<div className='basis-0 flex-grow'>
 				{/* <Image width={50} height={50} alt='Logo' src='https://img.icons8.com/plasticine/100/000000/salad.png' /> */}
-				<Link href='/'>
-					<a className='font-extrabold hover:text-m_text_dark_hover'>
-						<h2>{SITE_NAME}</h2>
-					</a>
+				<Link href='/' passHref className='font-extrabold hover:text-m_text_dark_hover'>
+					<h2>{SITE_NAME}</h2>
 				</Link>
 			</div>
 

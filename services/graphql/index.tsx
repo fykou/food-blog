@@ -2,8 +2,8 @@ import React from 'react'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client'
 
-export function GraphQLClient() {
-	const uri = process.env.API_URL + '/graphql'
+export function MyApolloClient() {
+	const uri = process.env.API_URL + 'graphql'
 
 	const apolloClient = new ApolloClient({
 		uri: uri,
@@ -15,7 +15,7 @@ export function GraphQLClient() {
 }
 
 export default function ApolloProviderWrapper({ children }: { children: JSX.Element }): JSX.Element {
-	const client = GraphQLClient()
+	const client = MyApolloClient()
 
 	return <ApolloProvider client={client}>{children}</ApolloProvider>
 }

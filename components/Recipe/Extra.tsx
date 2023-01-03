@@ -1,14 +1,14 @@
 // components/Tips.tsx
 type Props = {
-	tips?: string[]
+	extra?: string[]
 }
 
-const Tips: React.FC<Props> = ({ tips }: Props) => {
+const Extra: React.FC<Props> = ({ extra }: Props) => {
 	return (
 		<>
 			<h2>Tips</h2>
 			<ul className='p-0 m-0'>
-				{tips?.map((tip, index) => (
+				{extra?.map((tip, index) => (
 					<li key={index}>{tip}</li>
 				))}
 			</ul>
@@ -16,4 +16,4 @@ const Tips: React.FC<Props> = ({ tips }: Props) => {
 	)
 }
 
-export default Tips
+export default Extra
