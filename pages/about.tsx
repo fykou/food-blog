@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import Layout from '../components/Layout'
+import PageLayout from '../components/PageLayout'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { MyApolloClient } from '../services/graphql'
@@ -22,7 +22,7 @@ type AboutResponse = {
 const about: React.FC<Props> = (props: Props) => {
 	if (props.aboutResponse.error != null) return <ErrorComponent error={props.aboutResponse.error} />
 	return (
-		<Layout>
+		<PageLayout>
 			<Head>
 				<title>About | Emilys Kitchen</title>
 				<meta name='description' content='About' key='description' />
@@ -40,7 +40,7 @@ const about: React.FC<Props> = (props: Props) => {
 								src={
 									props.aboutResponse?.aboutData.data?.attributes?.coverImage?.data?.attributes?.url!
 								}
-								formats={
+								format={
 									props.aboutResponse?.aboutData.data?.attributes?.coverImage?.data?.attributes
 										?.formats!
 								}
@@ -58,7 +58,7 @@ const about: React.FC<Props> = (props: Props) => {
 											props.aboutResponse?.aboutData.data?.attributes?.profilePicture?.data
 												?.attributes?.url!
 										}
-										formats={
+										format={
 											props.aboutResponse?.aboutData.data?.attributes?.profilePicture?.data
 												?.attributes?.formats!
 										}
@@ -83,7 +83,7 @@ const about: React.FC<Props> = (props: Props) => {
 					</div>
 				</div>
 			</section>
-		</Layout>
+		</PageLayout>
 	)
 }
 

@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client'
 
 export function MyApolloClient() {
-	const uri = process.env.API_URL + 'graphql'
+	const uri = process.env.API_URL ? process.env.API_URL + 'graphql' : 'http://0.0.0.0:1337/graphql'
 
 	const apolloClient = new ApolloClient({
 		uri: uri,

@@ -21,6 +21,8 @@ export const GET_RECIPES = gql`
 							attributes {
 								url
 								formats
+								alternativeText
+								name
 							}
 						}
 					}

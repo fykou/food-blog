@@ -4,7 +4,7 @@ import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 import React from 'react'
 import ErrorComponent from '../components/ErrorComponent'
-import Layout from '../components/Layout'
+import PageLayout from '../components/PageLayout'
 import RecipeGrid from '../components/RecipeGrid'
 import { MyApolloClient } from '../services/graphql'
 import { RecipeEntityResponseCollection } from '../services/graphql-types'
@@ -22,12 +22,12 @@ type RecipeResponse = {
 const RecipesPage = (props: Props) => {
 	if (props.recipeResponse.error != null)
 		return (
-			<Layout>
+			<PageLayout>
 				<ErrorComponent error={props.recipeResponse.error} />
-			</Layout>
+			</PageLayout>
 		)
 	return (
-		<Layout>
+		<PageLayout>
 			<Head>
 				<title>Recipes | Emilys Kitchen</title>
 				<meta name='description' content='Recipe page for Emilys Kitchen' key='description' />
@@ -36,7 +36,7 @@ const RecipesPage = (props: Props) => {
 			<div className='flex flex-col justify-center items-center text-m_text_dark font-serif'>
 				<RecipeGrid props={props.recipeResponse.recipeData} />
 			</div>
-		</Layout>
+		</PageLayout>
 	)
 }
 

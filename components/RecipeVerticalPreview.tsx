@@ -1,7 +1,5 @@
 import Link from 'next/link'
 import React from 'react'
-import { GetCategories_categories_data } from '../services/graphql/__generated__/GetCategories'
-import { GetRecipes_recipes_data } from '../services/graphql/__generated__/GetRecipes'
 import typeGuard from '../utils/typeGuard'
 import ImageComp from './ImageComp'
 
@@ -19,7 +17,7 @@ const ImagePreview: React.FC<Props> = (props: Props) => {
 				<ImageComp
 					title={props.recipe.attributes?.title!}
 					src={props.recipe.attributes?.coverImage?.data?.attributes?.url}
-					formats={props.recipe.attributes?.coverImage?.data?.attributes?.formats}
+					format={props.recipe.attributes?.coverImage?.data?.attributes?.formats}
 					className='rounded-md'
 				/>
 			</div>

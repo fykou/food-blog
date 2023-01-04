@@ -1,39 +1,46 @@
 import Image from 'next/image'
+import { Maybe, Scalars } from '../services/graphql-types'
+import { ExclusifyUnion } from '../utils/exclusifyUnionType'
 
-type Props = {
-	title: string
-	src: string | undefined
-	formats?: any
-	slug?: string
+interface Props {
+	src: string
+	alt: string | null
+	formatData?: Maybe<Scalars['JSON']>
+	format?: ExclusifyUnion<Thumbnail | Small | Medium | Large | Original>
 	className?: string
 }
 
-const ImageComp: React.FC<Props> = ({ title, src, slug, formats, className }: Props) => {
-	let largeimg = null
-	let smallimg = null
+type Thumbnail = {
+	thumbnail: boolean
+}
 
-	if (formats) {
-		largeimg = formats.large.url
-		smallimg = formats.small.url
-	} else {
-		largeimg = src ? `${src}` : '/placeholder.png'
-	}
+type Small = {
+	small: boolean
+}
 
+type Medium = {
+	medium: boolean
+}
+
+type Large = {
+	large: boolean
+}
+
+type Original = {
+	original: boolean
+}
+
+const ImageComp: React.FC<Props> = (props: Props) => {
 	return (
-		<>
-			<div className='w-full h-full relative'>
-				<Image
-					src={largeimg}
-					alt={`Cover Image for ${title}`}
-					blurDataURL={smallimg}
-					quality={100}
-					placeholder={smallimg ? 'blur' : 'empty'}
-					fill
-					style={{ objectFit: 'cover' }}
-					className={className}
-				/>
-			</div>
-		</>
+		<div className='w-full h-full relative'>
+			<Image
+				src={props.src}
+				alt={`cannot show image for ${props.alt}`}
+				className={props.className}
+				style={{ objectFit: 'cover' }}
+				fill
+			/>
+		</div>
 	)
 }
 

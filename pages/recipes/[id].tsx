@@ -6,7 +6,7 @@ import ImageComp from '../../components/ImageComp'
 import ReactMarkdown from 'react-markdown'
 import { MyApolloClient } from '../../services/graphql'
 import { GET_RECIPE } from '../../services/graphql/queries'
-import Layout from '../../components/Layout'
+import PageLayout from '../../components/PageLayout'
 import ErrorComponent from '../../components/ErrorComponent'
 import { ApolloError } from '@apollo/client'
 import { RecipeEntityResponse } from '../../services/graphql-types'
@@ -24,20 +24,20 @@ type RecipeResponse = {
 const RecipePage: React.FC<Props> = (props: Props) => {
 	if (props.recipeResponse.error != null)
 		return (
-			<Layout>
+			<PageLayout>
 				<ErrorComponent error={props.recipeResponse.error} />
-			</Layout>
+			</PageLayout>
 		)
 
 	if (props.recipeResponse.recipeData.data == null)
 		return (
-			<Layout>
+			<PageLayout>
 				<ErrorComponent error={new Error("Sorry, we couldn't find that recipe.")} />
-			</Layout>
+			</PageLayout>
 		)
 
 	return (
-		<Layout>
+		<PageLayout>
 			<Head>
 				<title>{props.recipeResponse?.recipeData?.data?.attributes?.name} | Emilys Kitchen</title>
 				<meta
@@ -58,7 +58,7 @@ const RecipePage: React.FC<Props> = (props: Props) => {
 						<ImageComp
 							title={props.recipeResponse?.recipeData.data?.attributes?.name!}
 							src={props.recipeResponse?.recipeData.data?.attributes?.coverImage?.data?.attributes?.url!}
-							formats={
+							format={
 								props.recipeResponse?.recipeData.data?.attributes?.coverImage?.data?.attributes
 									?.formats!
 							}
@@ -100,7 +100,7 @@ const RecipePage: React.FC<Props> = (props: Props) => {
 					)}
 				</div>
 			</article>
-		</Layout>
+		</PageLayout>
 	)
 }
 

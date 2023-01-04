@@ -1,14 +1,14 @@
 import React from 'react'
 import ErrorComponent from '../components/ErrorComponent'
-import Layout from '../components/Layout'
+import PageLayout from '../components/PageLayout'
 
 type Props = {}
 
 const FourOhFour = (props: Props) => {
 	return (
-		<Layout>
+		<PageLayout>
 			<ErrorComponent error={new Error("Sorry, we could not find the page you're looking for.")} />
-		</Layout>
+		</PageLayout>
 	)
 }
 

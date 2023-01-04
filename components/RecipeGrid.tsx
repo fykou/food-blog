@@ -38,7 +38,7 @@ const RecipeGrid = ({ props }: Props) => {
 								<ImageComp
 									title={recipe.attributes?.name!}
 									src={recipe.attributes?.coverImage?.data?.attributes?.url}
-									formats={recipe.attributes?.coverImage?.data?.attributes?.formats}
+									format={recipe.attributes?.coverImage?.data?.attributes?.formats}
 									className='rounded-lg'
 								/>
 							</div>

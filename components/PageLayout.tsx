@@ -1,5 +1,5 @@
 // components/Layout.tsx
-import Meta from '../components/Meta'
+import Meta from './Meta'
 import Footer from './Footer'
 import Navigation from './Navigation'
 
@@ -8,7 +8,7 @@ type Props = {
 	pageTitle?: string
 }
 
-const Layout: React.FC<Props> = ({ children, pageTitle }: Props) => {
+const PageLayout: React.FC<Props> = ({ children, pageTitle }: Props) => {
 	return (
 		<>
 			<Meta pageTitle={pageTitle} />
@@ -21,4 +21,4 @@ const Layout: React.FC<Props> = ({ children, pageTitle }: Props) => {
 	)
 }
 
-export default Layout
+export default PageLayout

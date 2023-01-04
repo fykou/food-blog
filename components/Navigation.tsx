@@ -9,7 +9,8 @@ type Props = {
 }
 
 const MenuItems: any = {
-	about: ['Recipes', '/'],
+	home: ['Home', '/'],
+	about: ['Recipes', '/recipes'],
 	contact: ['About', '/about'],
 }
 
