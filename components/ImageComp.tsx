@@ -1,44 +1,54 @@
 import Image from 'next/image'
-import { Maybe, Scalars } from '../services/graphql-types'
-import { ExclusifyUnion } from '../utils/exclusifyUnionType'
+import React from 'react'
+import { Maybe, UploadFile } from '../services/graphql-types'
+import { ImageQuality } from '../utils/types'
 
 interface Props {
-	src: string
-	alt: string | null
-	formatData?: Maybe<Scalars['JSON']>
-	format?: ExclusifyUnion<Thumbnail | Small | Medium | Large | Original>
+	imageData?: Maybe<UploadFile>
+	format?: ImageQuality
 	className?: string
-}
-
-type Thumbnail = {
-	thumbnail: boolean
-}
-
-type Small = {
-	small: boolean
-}
-
-type Medium = {
-	medium: boolean
-}
-
-type Large = {
-	large: boolean
-}
-
-type Original = {
-	original: boolean
+	placeholder?: boolean
 }
 
 const ImageComp: React.FC<Props> = (props: Props) => {
+	let imageSource
+	if (props.format) {
+		switch (true) {
+			case 'thumbnail' in props.format:
+				imageSource = props.imageData?.formats?.thumbnail?.url
+				break
+			case 'small' in props.format:
+				imageSource = props.imageData?.formats?.small?.url
+				break
+			case 'medium' in props.format:
+				imageSource = props.imageData?.formats?.medium?.url
+				break
+			case 'large' in props.format:
+				imageSource = props.imageData?.formats?.large?.url
+				break
+			case 'original' in props.format:
+				imageSource = props.imageData?.url
+				break
+			default:
+				imageSource = props.imageData?.url
+		}
+	}
+	if (!imageSource) imageSource = props.imageData?.url
+
 	return (
 		<div className='w-full h-full relative'>
 			<Image
-				src={props.src}
-				alt={`cannot show image for ${props.alt}`}
-				className={props.className}
+				placeholder='blur'
+				blurDataURL={props.imageData?.formats?.thumbnail?.url || '/../'}
+				src={props.placeholder ? '/../public/placeholder.png' : imageSource || '/ '}
+				quality={75}
+				alt={`${props.imageData?.alternativeText || props.imageData?.name || 'could not find image'}`}
+				className={`${props.className} whitespace-pre-wrap shadow-inner shadow-gray-500`}
 				style={{ objectFit: 'cover' }}
 				fill
+				sizes='(max-width: 768px) 100vw,
+                        (max-width: 1200px) 50vw,
+                        33vw'
 			/>
 		</div>
 	)

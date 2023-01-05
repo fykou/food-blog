@@ -3,9 +3,9 @@ import { GetServerSideProps, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 import React from 'react'
+import { Card } from '../components/Card'
 import ErrorComponent from '../components/ErrorComponent'
 import PageLayout from '../components/PageLayout'
-import RecipeGrid from '../components/RecipeGrid'
 import { MyApolloClient } from '../services/graphql'
 import { RecipeEntityResponseCollection } from '../services/graphql-types'
 import { GET_RECIPES } from '../services/graphql/queries'
@@ -33,13 +33,27 @@ const RecipesPage = (props: Props) => {
 				<meta name='description' content='Recipe page for Emilys Kitchen' key='description' />
 				<meta property='og:description' content='Recipe page for Emilys Kitchen' key='ogDescription' />
 			</Head>
-			<div className='flex flex-col justify-center items-center text-m_text_dark font-serif'>
-				<RecipeGrid props={props.recipeResponse.recipeData} />
+			<div className='grid gap-2 grid-cols-[repeat(auto-fill,16rem)] max-w-screen-laptop justify-around w-full self-center p-8 text-m_text_dark font-serif '>
+				{props.recipeResponse.recipeData.data?.map((recipe) => {
+					if (recipe == null) return null
+					if (recipe.attributes == null) return null
+					if (recipe.id == null) return null
+					return (
+						<Card
+							key={recipe.id}
+							id={recipe.id}
+							attributes={recipe.attributes}
+							title
+							tagCollection={recipe.attributes.tags?.data}
+							imageQuality={{ small: true }}
+							className='w-64 h-[25.25rem]'
+						/>
+					)
+				})}
 			</div>
 		</PageLayout>
 	)
 }
-
 export default RecipesPage
 
 interface IParams extends ParsedUrlQuery {

@@ -2,14 +2,14 @@
 import { ApolloError } from '@apollo/client'
 import { GetServerSideProps, GetStaticProps } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
 import ErrorComponent from '../components/ErrorComponent'
-import ImageComp from '../components/ImageComp'
 import PageLayout from '../components/PageLayout'
+import { Card } from '../components/Card'
 import { MyApolloClient } from '../services/graphql'
 import { CategoryEntityResponseCollection, RecipeEntityResponseCollection } from '../services/graphql-types'
 import { GET_CATEGORIES, GET_RECIPES } from '../services/graphql/queries'
+import TextAndArrow from '../components/TextAndArrow'
 
 interface Props {
 	recipeResponse: RecipeResponse
@@ -36,53 +36,68 @@ const Dashboard: React.FC<Props> = (props: Props) => {
 				{props.recipeResponse.error ? (
 					<ErrorComponent error={props.recipeResponse.error} />
 				) : (
-					<section className='flex flex-col w-full text-center px-4'>
-						<h3 className='bg-m_primary px-4 py-2 m-8 rounded-md'>Latest Recipes</h3>
-						<div className='flex flex-row flex-wrap h-96 justify-evenly gap-4 overflow-hidden'>
+					<CardSection title='Latest Recipes' href='/recipes'>
+						<>
 							{props.recipeResponse.recipeData.data &&
-								props.recipeResponse.recipeData.data.map((entity) => {
-									const imageData = entity.attributes?.coverImage?.data?.attributes
-									if (!imageData) return null
+								props.recipeResponse.recipeData.data.map((recipe) => {
+									if (!recipe) return null
+									if (!recipe.attributes) return null
+									if (!recipe.id) return null
 									return (
-										<Link key={entity.id} className='w-72 h-full' href={`/recipes/${entity.id}`}>
-											<ImageComp
-												src={imageData.url}
-												alt={imageData.alternativeText || imageData.name}
-												className='rounded-md'
-												formatData={imageData.formats}
-												format={{ large: true }}
-											/>
-										</Link>
+										<Card
+											key={recipe.id}
+											id={recipe.id}
+											attributes={recipe.attributes}
+											title
+											imageQuality={{ medium: true }}
+											className='w-64 h-96'
+										/>
 									)
 								})}
-						</div>
-						<Link
-							href={`/recipes`}
-							passHref
-							className='flex flex-row p-2 justify-center items-center flex-nowrap self-end font-semibold'
-						>
-							<span>See more</span>
-							<svg
-								fill='none'
-								stroke='currentColor'
-								strokeLinecap='round'
-								strokeLinejoin='round'
-								strokeWidth='2'
-								className='w-4 h-4 ml-2'
-								viewBox='0 0 24 24'
-							>
-								<path d='M5 12h14M12 5l7 7-7 7'></path>
-							</svg>
-						</Link>
-					</section>
+						</>
+					</CardSection>
 				)}
-				{/* {props.categoriesResponse.error ? (
+				{props.categoriesResponse.error ? (
 					<ErrorComponent error={props.categoriesResponse.error} />
 				) : (
-					<MainPageSection previewData={props.categoriesResponse.categoryData.data} />
-				)} */}
+					<CardSection title='Categories' href='/recipes'>
+						<>
+							{props.categoriesResponse?.categoryData?.data.map((entity) => {
+								if (!entity) return null
+								if (!entity.attributes) return null
+								if (!entity.id) return null
+								return (
+									<Card
+										key={entity.id}
+										id={entity.id}
+										attributes={entity.attributes}
+										title
+										imageQuality={{ small: true }}
+										className='w-64 h-96'
+									/>
+								)
+							})}
+						</>
+					</CardSection>
+				)}
 			</div>
 		</PageLayout>
+	)
+}
+
+const CardSection = ({ children, title, href }: { children: JSX.Element; title: string; href: string }) => {
+	return (
+		<section className='flex flex-col w-full text-center px-4'>
+			<h3 className='bg-m_primary px-4 py-2 m-8 rounded-md'>{title}</h3>
+			<div className='flex flex-row flex-wrap h-96 justify-around gap-2 mx-8 overflow-hidden'>{children}</div>
+			<Link
+				href={href}
+				passHref
+				className='flex flex-row p-2 mr-8 justify-center items-center flex-nowrap self-end font-semibold'
+			>
+				<TextAndArrow text='See more' />
+			</Link>
+		</section>
 	)
 }
 
