@@ -31,32 +31,27 @@ const Directions: React.FC<Props> = (props: Props) => {
 		setDirectionsSectionList(newDirectionsList)
 	}
 
-	if (!props.directionSection) return <div />
+	if (!props.directionSection || props.directionSection.length < 1) return null
 
 	return (
 		<div className='font-serif px-4 md:px-0'>
 			<h2>Directions</h2>
-			{directionsSectionList &&
-				directionsSectionList.map((directionSection) => (
-					<div key={directionSection.id}>
-						<h3>{directionSection.section}</h3>
-						<ol role='list' className='list-decimal pl-6 whitespace-normal'>
-							{directionSection.directions?.map((direction) => (
-								<li key={direction.id} className='my-2 hover:text-m_text_dark_hover'>
-									<button onClick={() => handleToggle(direction.id)} className='cursor-checkbox'>
-										<p
-											className={`text-left font-serif ${
-												direction?.completed ? 'line-through' : ''
-											}`}
-										>
-											{direction?.direction}
-										</p>
-									</button>
-								</li>
-							))}
-						</ol>
-					</div>
-				))}
+			{directionsSectionList.map((directionSection) => (
+				<div key={directionSection.id}>
+					<h3>{directionSection.section}</h3>
+					<ol role='list' className='list-decimal pl-6 whitespace-normal'>
+						{directionSection.directions?.map((direction) => (
+							<li key={direction.id} className='my-2 hover:text-m_text_dark_hover'>
+								<button onClick={() => handleToggle(direction.id)} className='cursor-checkbox'>
+									<p className={`text-left font-serif ${direction?.completed ? 'line-through' : ''}`}>
+										{direction?.direction}
+									</p>
+								</button>
+							</li>
+						))}
+					</ol>
+				</div>
+			))}
 		</div>
 	)
 }

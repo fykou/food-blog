@@ -41,7 +41,7 @@ export const Card = (props: CardProps) => {
 			className={`flex flex-col text-center items-center justify-center w-full h-full overflow-hidden ${props.className}`}
 			style={{ minWidth: '24px', minHeight: '24px' }}
 		>
-			<Link href={`/recipes/${props.attributes?.name}`} className='w-full h-full'>
+			<Link href={`/recipes/${props.id}`} className='w-full h-full'>
 				<ImageComp
 					imageData={imageData}
 					format={props.imageQuality || { small: true }}
@@ -50,7 +50,7 @@ export const Card = (props: CardProps) => {
 			</Link>
 			{props.title && (
 				<>
-					<Link href={`/recipes/${props.attributes?.name}`} className='w-full'>
+					<Link href={`/recipes/${props.id}`} className='w-full'>
 						<h3 className='text-ellipsis whitespace-nowrap overflow-hidden w-full'>
 							{props.attributes?.name}
 						</h3>

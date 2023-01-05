@@ -56,13 +56,9 @@ const RecipePage: React.FC<Props> = (props: Props) => {
 				<div className='grid grid-cols-1 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.5fr)] grid-flow-row gap-8 w-screen md:px-16'>
 					<div className='aspect-[3/4]'>
 						<ImageComp
-							title={props.recipeResponse?.recipeData.data?.attributes?.name!}
-							src={props.recipeResponse?.recipeData.data?.attributes?.coverImage?.data?.attributes?.url!}
-							format={
-								props.recipeResponse?.recipeData.data?.attributes?.coverImage?.data?.attributes
-									?.formats!
-							}
-							className='md:rounded-xl'
+							imageData={props.recipeResponse?.recipeData.data.attributes?.coverImage?.data?.attributes}
+							format={{ medium: true }}
+							className='rounded-md'
 						/>
 					</div>
 					<div className='font-serif whitespace-normal px-4 md:px-0'>
