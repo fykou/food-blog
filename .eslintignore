@@ -1,0 +1,9 @@
+__generated__
+node_modules
+package-lock.json
+yarn.lock
+build
+dist
+res
+coverage
+.next

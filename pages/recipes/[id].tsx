@@ -39,7 +39,7 @@ const RecipePage: React.FC<Props> = (props: Props) => {
 	return (
 		<PageLayout>
 			<Head>
-				<title>{props.recipeResponse?.recipeData?.data?.attributes?.name} | Emilys Kitchen</title>
+				<title>{props.recipeResponse?.recipeData?.data?.attributes?.name + ' | Emilys Kitchen'}</title>
 				<meta
 					name='description'
 					content={props.recipeResponse?.recipeData.data?.attributes?.description || ''}
@@ -87,7 +87,7 @@ const RecipePage: React.FC<Props> = (props: Props) => {
 					{props.recipeResponse?.recipeData.data?.attributes?.extra && (
 						<>
 							<div />
-							<div className='prose max-w-none whitespace-normal text-m_text_dark font-serif w-full px-4 md:px-0'>
+							<div className='prose whitespace-normal text-m_text_dark font-serif w-full px-8 md:px-0'>
 								<ReactMarkdown>
 									{props.recipeResponse?.recipeData.data?.attributes?.extra}
 								</ReactMarkdown>

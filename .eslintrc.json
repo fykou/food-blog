@@ -1,3 +1,147 @@
 {
-  "extends": "next/core-web-vitals"
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": ["plugin:react/recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "parserOptions": {
+                "project": ["tsconfig.json"]
+            },
+            "parser": "@typescript-eslint/parser",
+            "rules": {
+                "@typescript-eslint/consistent-type-assertions": [
+                    "error",
+                    {
+                        "assertionStyle": "as",
+                        "objectLiteralTypeAssertions": "never"
+                    }
+                ],
+                "@typescript-eslint/comma-dangle": [
+                    "error",
+                    {
+                        "arrays": "always-multiline",
+                        "objects": "always-multiline",
+                        "imports": "always-multiline",
+                        "exports": "always-multiline",
+                        "functions": "always-multiline",
+                        "enums": "ignore",
+                        "generics": "ignore",
+                        "tuples": "ignore"
+                    }
+                ],
+                "@typescript-eslint/method-signature-style": ["error"],
+                "@typescript-eslint/naming-convention": [
+                    "error",
+                    {
+                        "selector": "variableLike",
+                        "leadingUnderscore": "allow",
+                        "trailingUnderscore": "allow",
+                        "format": ["camelCase", "PascalCase", "UPPER_CASE"]
+                    }
+                ],
+                "@typescript-eslint/no-base-to-string": "error",
+                "@typescript-eslint/no-dynamic-delete": "error",
+                "@typescript-eslint/no-empty-interface": ["error", { "allowSingleExtends": true }],
+                "@typescript-eslint/no-extra-non-null-assertion": "error",
+                "@typescript-eslint/no-extraneous-class": ["error", { "allowWithDecorator": true }],
+                "@typescript-eslint/no-floating-promises": "error",
+                "@typescript-eslint/no-for-in-array": "error",
+                "@typescript-eslint/no-implied-eval": "error",
+                "@typescript-eslint/no-invalid-void-type": "error",
+                "@typescript-eslint/no-misused-new": "error",
+                "@typescript-eslint/no-misused-promises": "error",
+                "@typescript-eslint/no-namespace": "error",
+                "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
+                "@typescript-eslint/no-non-null-assertion": "error",
+                "@typescript-eslint/no-this-alias": ["error", { "allowDestructuring": true }],
+                "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
+                "@typescript-eslint/no-unnecessary-type-assertion": "error",
+                "@typescript-eslint/no-var-requires": "error",
+                "@typescript-eslint/prefer-function-type": "error",
+                "@typescript-eslint/prefer-includes": "error",
+                "@typescript-eslint/prefer-nullish-coalescing": [
+                    "error",
+                    { "ignoreConditionalTests": false, "ignoreMixedLogicalExpressions": false }
+                ],
+                "@typescript-eslint/prefer-optional-chain": "error",
+                "@typescript-eslint/prefer-readonly": "error",
+                "@typescript-eslint/prefer-reduce-type-parameter": "error",
+                "@typescript-eslint/prefer-ts-expect-error": "error",
+                "@typescript-eslint/promise-function-async": "error",
+                "@typescript-eslint/require-array-sort-compare": ["error", { "ignoreStringArrays": true }],
+                "@typescript-eslint/restrict-plus-operands": ["error", { "checkCompoundAssignments": true }],
+                "@typescript-eslint/return-await": ["error", "always"],
+                "@typescript-eslint/triple-slash-reference": [
+                    "error",
+                    { "lib": "never", "path": "never", "types": "never" }
+                ],
+                "@typescript-eslint/type-annotation-spacing": "error",
+                "no-void": ["error", { "allowAsStatement": true }]
+            }
+        }
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": ["react", "@typescript-eslint", "prettier"],
+    "root": true,
+    "rules": {
+        // eslint rules
+        // https://eslint.org/docs/latest/rules
+        "semi": ["error", "never"], // Require or disallow semicolons instead of ASI
+        "quotes": "off", // Require single quotes around object literal property names
+        "no-multi-spaces": "error", // Disallow multiple spaces
+        "spaced-comment": "error", // Enforce consistent spacing after the //or /* in a comment
+        "no-trailing-spaces": "error", // Disallow trailing whitespace at the end of lines
+        "no-multiple-empty-lines": "error", // Disallow multiple empty lines
+        "no-multi-assign": "error", //  Disallow use of chained assignment expressions
+        "no-mixed-spaces-and-tabs": "error", // Disallow mixed spaces and tabs for indentation
+        "indent": ["warn", 4, { "SwitchCase": 1 }], // Enforce consistent indentation
+        "camelcase": "error", // Enforce camelcase naming convention
+        "no-var": "error", // Require let or const instead of var
+        "prefer-const": "error", // Require const declarations for variables that are never reassigned after declared
+        "object-curly-spacing": ["error", "always"], // Enforce consistent spacing inside braces
+        "array-bracket-spacing": ["error", "never"], // Enforce consistent spacing inside array brackets
+        "comma-spacing": ["error", { "before": false, "after": true }], // Enforce consistent spacing before and after commas
+        "comma-style": ["error", "last"], // Enforce consistent comma style
+        "comma-dangle": ["error", "always-multiline"], // Require or disallow trailing commas
+        "no-console": ["warn", { "allow": ["warn", "error"] }], // Disallow the use of console
+        "no-debugger": "warn", // Disallow the use of debugger
+        "no-alert": "warn", // Disallow the use of alert, confirm, and prompt
+        "no-else-return": "warn", // Disallow unnecessary blocks following if and else
+        "no-eval": "error", // Disallow the use of eval()
+        "no-implied-eval": "error", // Disallow the use of eval()-like methods
+        "no-extend-native": "error", // Disallow extending native types
+        "no-extra-bind": "error", // Disallow unnecessary calls to .bind()
+        "no-extra-label": "warn", // Disallow unnecessary labels
+        "no-floating-decimal": "error", // Disallow leading or trailing decimal points in numeric literals
+        "no-implicit-coercion": "error", // Disallow shorthand type conversions
+        "jsx-quotes": "off", // Enforce the consistent use of either double or single quotes in JSX attributes
+        "react/jsx-equals-spacing": ["off"], // Enforce or disallow spaces around equal signs in JSX attributes
+
+        // jsx-eslint rules
+        // https://github.com/jsx-eslint/eslint-plugin-react#list-of-supported-rules
+        "react/react-in-jsx-scope": "error", // Prevent missing React when using JSX
+        "react/function-component-definition": "off", // Enforce a specific function type for function components
+        "react/self-closing-comp": "warn", // Prevent extra closing tags for components without children
+        "react/jsx-uses-vars": "warn", // Prevent variables used in JSX to be incorrectly marked as unused
+        "react/jsx-no-duplicate-props": "error", // Prevent duplicate props in JSX
+        "react/jsx-no-undef": "warn", // Disallow undeclared variables in JSX
+        "react/jsx-pascal-case": "error", // Enforce PascalCase for user-defined JSX components
+        "react/jsx-boolean-value": "off", // Enforce boolean attributes notation in JSX
+        "react/jsx-uses-react": "warn", // Prevent React to be incorrectly marked as unused
+        "react/jsx-no-useless-fragment": "error" // Prevent unnecessary fragments
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/resolver": {
+            "typescript": {}
+        }
+    }
 }
