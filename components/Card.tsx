@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { Category, CategoryEntity, Maybe, Recipe, RecipeEntity, TagEntity, UploadFile } from '../services/graphql-types'
+import { Category, Recipe, TagEntity } from '../services/graphql-types'
 import { ImageQuality } from '../utils/types'
 import ImageComp from './ImageComp'
 import TextAndArrow from './TextAndArrow'

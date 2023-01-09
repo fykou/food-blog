@@ -1,6 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
-
 import { ORGINIZATION, SITE_NAME, INSTAGRAM_USERNAME } from '../utils/constants'
 import Link from 'next/link'
 

@@ -1,4 +1,3 @@
-// components/Tips.tsx
 type Props = {
 	extra?: string[]
 }

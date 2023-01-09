@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Maybe, UploadFile } from '../services/graphql-types'
 import { ImageQuality } from '../utils/types'
 
@@ -11,40 +11,38 @@ interface Props {
 }
 
 const ImageComp: React.FC<Props> = (props: Props) => {
-	let imageSource
-	if (props.format) {
-		switch (true) {
-			case 'thumbnail' in props.format:
-				imageSource = props.imageData?.formats?.thumbnail?.url
-				break
-			case 'small' in props.format:
-				imageSource = props.imageData?.formats?.small?.url
-				break
-			case 'medium' in props.format:
-				imageSource = props.imageData?.formats?.medium?.url
-				break
-			case 'large' in props.format:
-				imageSource = props.imageData?.formats?.large?.url
-				break
-			case 'original' in props.format:
-				imageSource = props.imageData?.url
-				break
-			default:
-				imageSource = props.imageData?.url
+	const ref = useRef<HTMLImageElement>(null)
+	const [src, setSrc] = useState<string>(() => {
+		if (props.placeholder) {
+			return '/placeholder.png'
 		}
-	}
-	if (!imageSource) imageSource = props.imageData?.url
+		if (props.format) {
+			switch (true) {
+				case 'thumbnail' in props.format:
+					return props.imageData?.formats?.thumbnail?.url
+				case 'small' in props.format:
+					return props.imageData?.formats?.small?.url
+				case 'medium' in props.format:
+					return props.imageData?.formats?.medium?.url
+				case 'large' in props.format:
+					return props.imageData?.formats?.large?.url
+				case 'original' in props.format:
+					return props.imageData?.url
+			}
+		}
+		return props.imageData?.url
+	})
 
 	return (
 		<div className='w-full h-full relative'>
 			<Image
-				placeholder='blur'
-				blurDataURL={props.imageData?.formats?.thumbnail?.url || '/../'}
-				src={props.placeholder ? '/../public/placeholder.png' : imageSource || '/ '}
+				ref={ref}
+				src={src}
 				quality={75}
 				alt={`${props.imageData?.alternativeText || props.imageData?.name || 'could not find image'}`}
 				className={`${props.className} whitespace-pre-wrap shadow-inner shadow-gray-500`}
 				style={{ objectFit: 'cover' }}
+				onError={() => ref.current?.classList.add('p-2')}
 				fill
 				sizes='(max-width: 768px) 100vw,
                         (max-width: 1200px) 50vw,

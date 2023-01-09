@@ -1,4 +1,3 @@
-// components/Layout.tsx
 import Meta from './Meta'
 import Footer from './Footer'
 import Navigation from './Navigation'

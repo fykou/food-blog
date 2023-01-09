@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-
 import { SITE_NAME } from '../utils/constants'
 import SearchField from './SearchField'
 
@@ -65,19 +64,16 @@ const Navigation: React.FC<Props> = ({ className }: Props) => {
 const Navbar = ({ menuOpen, setMenuOpen }: any) => (
 	<>
 		<div className='w-full max-w-screen-laptop text-center flex items-center justify-between md:px-16 px-4 py-4 text-m_dark font-serif'>
-			<nav className='basis-0 flex-grow text-start hidden md:block space-x-6 font-semibold'>{navLinks}</nav>
+			<nav className='basis-0 grow text-start hidden md:block space-x-6 font-semibold'>{navLinks}</nav>
 
-			<div className='basis-0 flex-grow'>
-				{/* <Image width={50} height={50} alt='Logo' src='https://img.icons8.com/plasticine/100/000000/salad.png' /> */}
+			<div className='basis-0 grow'>
 				<Link href='/' passHref className='font-extrabold hover:text-m_text_dark_hover'>
 					<h2>{SITE_NAME}</h2>
 				</Link>
 			</div>
 
 			<div className='basis-0 flex-grow hidden md:block'>
-				<div className='ml-16'>
-					<SearchField />
-				</div>
+				<div className='ml-16'>{/* <SearchField /> */}</div>
 			</div>
 
 			<BurgerButton toggleState={menuOpen} onClick={setMenuOpen} />

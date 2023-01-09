@@ -1,7 +1,6 @@
 // components/Meta.tsx
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-
 import { SITE_URL, SITE_NAME } from '../utils/constants'
 
 const meta = {

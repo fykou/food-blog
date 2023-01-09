@@ -1,6 +1,6 @@
 // pages/index.tsx
 import { ApolloError } from '@apollo/client'
-import { GetServerSideProps, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import ErrorComponent from '../components/ErrorComponent'

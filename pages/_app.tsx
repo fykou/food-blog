@@ -1,5 +1,4 @@
 import type { AppProps } from 'next/app'
-import PageLayout from '../components/PageLayout'
 import ApolloProviderWrapper from '../services/graphql'
 import '../styles/globals.css'
 
