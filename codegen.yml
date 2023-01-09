@@ -1,0 +1,26 @@
+schema:
+    - http://0.0.0.0:1337/graphql
+documents:
+    - ./services/**/*.ts
+overwrite: true
+clientSchema: ./local/schema.graphql
+generates:
+    services/graphql-types.ts:
+        plugins:
+            - typescript
+        config:
+            declarationKind:
+                union: type
+                type: interface
+                input: interface
+                scalar: interface
+                arguments: interface
+                interface: interface
+            enumsAsTypes: true
+            includeDirectives: true
+            commentDescriptions: true
+            flattenGeneratedTypes: true
+            avoidOptionals:
+                field: false
+                object: false
+                inputValue: false

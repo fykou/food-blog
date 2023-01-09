@@ -1,10 +1,8 @@
-import gql from 'graphql-tag'
-
-// Define queries here
+import { gql } from '@apollo/client'
 
 export const GET_RECIPES = gql`
-	query GetRecipes($pagination: PaginationArg, $sort: [String]) {
-		recipes(pagination: $pagination, sort: $sort) {
+	query GetRecipes($pagination: PaginationArg, $sort: [String], $filters: RecipeFiltersInput) {
+		recipes(pagination: $pagination, sort: $sort, filters: $filters) {
 			meta {
 				pagination {
 					total
@@ -15,22 +13,31 @@ export const GET_RECIPES = gql`
 			}
 			data {
 				attributes {
-					title
-					slug
+					name
 					description
-					directions
-					yields
-					ingredients
-					tips
-					other
 					publishedAt
 					coverImage {
 						data {
 							attributes {
 								url
 								formats
+								alternativeText
+								name
 							}
 						}
+					}
+					tags {
+						data {
+							attributes {
+								tag
+							}
+							id
+						}
+					}
+					socialLinks {
+						icon
+						url
+						id
 					}
 				}
 				id
@@ -44,14 +51,10 @@ export const GET_RECIPE = gql`
 		recipe(id: $id) {
 			data {
 				attributes {
-					title
-					slug
+					name
 					description
-					directions
-					yields
-					ingredients
-					tips
-					other
+					servings
+					extra
 					publishedAt
 					coverImage {
 						data {
@@ -61,6 +64,47 @@ export const GET_RECIPE = gql`
 							}
 						}
 					}
+					socialLinks {
+						icon
+						url
+						id
+					}
+					tags {
+						data {
+							attributes {
+								tag
+							}
+							id
+						}
+					}
+					category {
+						data {
+							attributes {
+								name
+							}
+						}
+					}
+					ingredientsSection {
+						id
+						section
+						ingredients {
+							amount
+							id
+							ingredient
+							optional
+							unit
+						}
+					}
+					directionsSection {
+						id
+						section
+						directions {
+							simpleName
+							id
+							direction
+						}
+					}
+					servingUnit
 				}
 			}
 		}
@@ -71,8 +115,75 @@ export const GET_CATEGORIES = gql`
 	query GetCategories {
 		categories {
 			data {
+				id
 				attributes {
-					Name
+					name
+					coverImage {
+						data {
+							attributes {
+								url
+								caption
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+`
+
+export const GET_ABOUT = gql`
+	query getAbout {
+		aboutPage {
+			data {
+				attributes {
+					profileName
+					description
+					profileDescription
+					coverImage {
+						data {
+							attributes {
+								url
+								formats
+								caption
+							}
+						}
+					}
+					profilePicture {
+						data {
+							attributes {
+								url
+								formats
+								caption
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+`
+
+export const GET_META = gql`
+	query getMeta {
+		meta {
+			data {
+				attributes {
+					siteName
+					organization
+					socials {
+						id
+						icon
+						url
+					}
+					favicon {
+						data {
+							attributes {
+								url
+								formats
+							}
+						}
+					}
 				}
 			}
 		}
