@@ -55,16 +55,16 @@ const RecipePage: React.FC<Props> = (props: Props) => {
                 />
             </Head>
 
-            <article className='max-w-screen-laptop self-center md:mx-16 md:mt-8 mb-16'>
-                <div className='grid grid-cols-1 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.5fr)] grid-flow-row gap-8 w-screen md:px-16'>
+            <article className='max-w-screen-laptop self-center sm:mx-16 sm:mt-8 mb-16'>
+                <div className='grid grid-cols-1 sm:grid-cols-[minmax(0,_1fr)_minmax(0,_1.5fr)] grid-flow-row gap-8 w-screen sm:px-16'>
                     <div className='aspect-[3/4]'>
                         <ImageComp
                             imageData={props.recipeResponse?.recipeData.data.attributes?.coverImage?.data?.attributes}
                             format={{ medium: true }}
-                            className='rounded-md'
+                            className='rounded-sm'
                         />
                     </div>
-                    <div className='font-serif whitespace-normal px-4 md:px-0'>
+                    <div className='font-serif whitespace-normal px-4 sm:px-0'>
                         <h1 className='py-4'>{props.recipeResponse?.recipeData.data?.attributes?.name}</h1>
                         <p className='py-4'>{props.recipeResponse?.recipeData.data?.attributes?.description}</p>
 
@@ -78,8 +78,8 @@ const RecipePage: React.FC<Props> = (props: Props) => {
                             </span>
                         )}
                     </div>
-
                     <Ingredients
+                        className='sm:sticky sm:top-5'
                         ingredientsSection={props.recipeResponse?.recipeData.data?.attributes?.ingredientsSection}
                     />
 
@@ -90,7 +90,7 @@ const RecipePage: React.FC<Props> = (props: Props) => {
                     {props.recipeResponse?.recipeData.data?.attributes?.extra && (
                         <>
                             <div />
-                            <div className='prose whitespace-normal text-m_text_dark font-serif w-full px-8 md:px-0'>
+                            <div className='prose whitespace-normal text-m_text_dark font-serif w-full px-8 sm:px-0'>
                                 <ReactMarkdown>
                                     {props.recipeResponse?.recipeData.data?.attributes?.extra}
                                 </ReactMarkdown>

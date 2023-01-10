@@ -7,6 +7,7 @@ import { Unit } from '../../utils/enums'
 
 interface Props {
     ingredientsSection: Maybe<Array<Maybe<ComponentRecipeDataIngredientSection>>> | undefined
+    className?: string
 }
 
 // create a dictionary of units and wether or not they are metric
@@ -26,7 +27,8 @@ const Ingredients: React.FC<Props> = (props: Props) => {
     const metricToggleRef = useRef<HTMLLabelElement>(null)
     const [showImperial, setShowImperial] = useLocalStorage<boolean>('showImperial', false)
 
-    const [ingredientsSectionList, setIngredientsSectionList] = useState(
+    const [ingredientsSectionList, setIngredientsSectionList] = useLocalStorage(
+        'ingredientsSectionList',
         props.ingredientsSection?.map((ingredientData) => ({
             ...ingredientData,
             completed: false,
@@ -62,8 +64,7 @@ const Ingredients: React.FC<Props> = (props: Props) => {
     if (props.ingredientsSection == null || props.ingredientsSection.length < 1) return null
 
     return (
-        <div className='font-serif px-4 md:px-0'>
-            <h2>Ingredients</h2>
+        <div className={`flex flex-col gap-2 font-serif px-4 sm:px-0 ${props.className}`}>
             <label ref={metricToggleRef} className='relative inline-flex items-center cursor-pointer'>
                 <input
                     type='checkbox'
@@ -73,8 +74,27 @@ const Ingredients: React.FC<Props> = (props: Props) => {
                     checked={showImperial}
                 />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-m_secondary" />
-                <span className='ml-3 w-4 text-sm font-medium'>{showImperial ? 'imperial' : 'metric'}</span>
+                <span className='ml-3 w-16 text-sm font-medium'>{showImperial ? 'imperial' : 'metric'}</span>
             </label>
+
+            <button
+                className='text-left bg-m_tertiary w-fit hover:bg-m_tertiary_hover text-white p-1 px-2 rounded-full'
+                onClick={() => {
+                    setIngredientsSectionList(
+                        ingredientsSectionList?.map((ingredientData) => ({
+                            ...ingredientData,
+                            completed: false,
+                            ingredients: ingredientData?.ingredients?.map((ingredient) => ({
+                                ...ingredient,
+                                completed: false,
+                            })),
+                        })),
+                    )
+                }}
+            >
+                reset checks
+            </button>
+            <h2>Ingredients</h2>
 
             {ingredientsSectionList?.map((ingredientSection) => (
                 <div key={ingredientSection.id} className='mb-4'>
