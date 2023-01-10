@@ -477,7 +477,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.18.9"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.10.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.18.3":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3":
   version "7.20.7"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.20.7.tgz"
   integrity sha512-UF0tvkUtxwAgZ5W/KrkHf0Rn0fdnLDU9ScxBrEVNUprE/MzirjK4MJUX1/BVDv00Sv8cljtukVK1aky++X1SjQ==
@@ -628,33 +628,6 @@
     js-yaml "^4.1.0"
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
-
-"@floating-ui/core@^1.0.5":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@floating-ui/core/-/core-1.1.0.tgz"
-  integrity sha512-zbsLwtnHo84w1Kc8rScAo5GMk1GdecSlrflIbfnEBJwvTSj1SL6kkOYV+nHraMCPEy+RNZZUaZyL8JosDGCtGQ==
-
-"@floating-ui/dom@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@floating-ui/dom/-/dom-1.1.0.tgz"
-  integrity sha512-TSogMPVxbRe77QCj1dt8NmRiJasPvuc+eT5jnJ6YpLqgOD2zXc5UA3S1qwybN+GVCDNdKfpKy1oj8RpzLJvh6A==
-  dependencies:
-    "@floating-ui/core" "^1.0.5"
-
-"@floating-ui/react-dom-interactions@^0.10.1":
-  version "0.10.3"
-  resolved "https://registry.npmjs.org/@floating-ui/react-dom-interactions/-/react-dom-interactions-0.10.3.tgz"
-  integrity sha512-UEHqdnzyoiWNU5az/tAljr9iXFzN18DcvpMqW+/cXz4FEhDEB1ogLtWldOWCujLerPBnSRocADALafelOReMpw==
-  dependencies:
-    "@floating-ui/react-dom" "^1.0.0"
-    aria-hidden "^1.1.3"
-
-"@floating-ui/react-dom@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@floating-ui/react-dom/-/react-dom-1.1.0.tgz"
-  integrity sha512-xyP9dMqZouuQ7h10DvbEbxZItuUleKHXe7XQFvbpttjXZrfyQMaZVTnWsE/t3hrHakZy18HxEBZRzGNXQHd0GA==
-  dependencies:
-    "@floating-ui/dom" "^1.1.0"
 
 "@graphql-codegen/cli@^2.16.2":
   version "2.16.2"
@@ -1137,35 +1110,6 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@mantine/core@^5.2.6":
-  version "5.9.6"
-  resolved "https://registry.npmjs.org/@mantine/core/-/core-5.9.6.tgz"
-  integrity sha512-N+Jow2vbaqb6IaOupzSEMJcuMZ5h3Sk6832j5GuNzacu377mpn8DR7lyFqKPTTowvhsUgI5fnFJRBsG4wuFgsw==
-  dependencies:
-    "@floating-ui/react-dom-interactions" "^0.10.1"
-    "@mantine/styles" "5.9.6"
-    "@mantine/utils" "5.9.6"
-    "@radix-ui/react-scroll-area" "1.0.2"
-    react-textarea-autosize "8.3.4"
-
-"@mantine/hooks@^5.2.6":
-  version "5.9.6"
-  resolved "https://registry.npmjs.org/@mantine/hooks/-/hooks-5.9.6.tgz"
-  integrity sha512-60gI0dXjfpx5XJZteIt6rKWtgE3RdpvKY2OmUH4yRe2ZVqFU4quWdt6r720x9dWSJs32xm0AYUxZxjJyCLhnFw==
-
-"@mantine/styles@5.9.6":
-  version "5.9.6"
-  resolved "https://registry.npmjs.org/@mantine/styles/-/styles-5.9.6.tgz"
-  integrity sha512-IZ4fdXzm1yUcSZgtUZGuWKL1mPkhVsG5veJKZ4o4M/8rO2fowzumay9WBrGJIs0i3KAM0KAGZ6lLyLGXkJYQQw==
-  dependencies:
-    clsx "1.1.1"
-    csstype "3.0.9"
-
-"@mantine/utils@5.9.6":
-  version "5.9.6"
-  resolved "https://registry.npmjs.org/@mantine/utils/-/utils-5.9.6.tgz"
-  integrity sha512-MMKUsTLWzt9g7z1sfjPHIAaV2TzEdH6oRREZgFFtzfRR7V9jrpFdzCPruh+K/Cxh8xDWGPXKaSOkCfX6FSXw6A==
-
 "@next/env@13.1.1":
   version "13.1.1"
   resolved "https://registry.npmjs.org/@next/env/-/env-13.1.1.tgz"
@@ -1283,96 +1227,6 @@
     pvtsutils "^1.3.2"
     tslib "^2.4.1"
     webcrypto-core "^1.7.4"
-
-"@radix-ui/number@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@radix-ui/number/-/number-1.0.0.tgz"
-  integrity sha512-Ofwh/1HX69ZfJRiRBMTy7rgjAzHmwe4kW9C9Y99HTRUcYLUuVT0KESFj15rPjRgKJs20GPq8Bm5aEDJ8DuA3vA==
-  dependencies:
-    "@babel/runtime" "^7.13.10"
-
-"@radix-ui/primitive@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@radix-ui/primitive/-/primitive-1.0.0.tgz"
-  integrity sha512-3e7rn8FDMin4CgeL7Z/49smCA3rFYY3Ha2rUQ7HRWFadS5iCRw08ZgVT1LaNTCNqgvrUiyczLflrVrF0SRQtNA==
-  dependencies:
-    "@babel/runtime" "^7.13.10"
-
-"@radix-ui/react-compose-refs@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@radix-ui/react-compose-refs/-/react-compose-refs-1.0.0.tgz"
-  integrity sha512-0KaSv6sx787/hK3eF53iOkiSLwAGlFMx5lotrqD2pTjB18KbybKoEIgkNZTKC60YECDQTKGTRcDBILwZVqVKvA==
-  dependencies:
-    "@babel/runtime" "^7.13.10"
-
-"@radix-ui/react-context@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@radix-ui/react-context/-/react-context-1.0.0.tgz"
-  integrity sha512-1pVM9RfOQ+n/N5PJK33kRSKsr1glNxomxONs5c49MliinBY6Yw2Q995qfBUUo0/Mbg05B/sGA0gkgPI7kmSHBg==
-  dependencies:
-    "@babel/runtime" "^7.13.10"
-
-"@radix-ui/react-direction@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@radix-ui/react-direction/-/react-direction-1.0.0.tgz"
-  integrity sha512-2HV05lGUgYcA6xgLQ4BKPDmtL+QbIZYH5fCOTAOOcJ5O0QbWS3i9lKaurLzliYUDhORI2Qr3pyjhJh44lKA3rQ==
-  dependencies:
-    "@babel/runtime" "^7.13.10"
-
-"@radix-ui/react-presence@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@radix-ui/react-presence/-/react-presence-1.0.0.tgz"
-  integrity sha512-A+6XEvN01NfVWiKu38ybawfHsBjWum42MRPnEuqPsBZ4eV7e/7K321B5VgYMPv3Xx5An6o1/l9ZuDBgmcmWK3w==
-  dependencies:
-    "@babel/runtime" "^7.13.10"
-    "@radix-ui/react-compose-refs" "1.0.0"
-    "@radix-ui/react-use-layout-effect" "1.0.0"
-
-"@radix-ui/react-primitive@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/@radix-ui/react-primitive/-/react-primitive-1.0.1.tgz"
-  integrity sha512-fHbmislWVkZaIdeF6GZxF0A/NH/3BjrGIYj+Ae6eTmTCr7EB0RQAAVEiqsXK6p3/JcRqVSBQoceZroj30Jj3XA==
-  dependencies:
-    "@babel/runtime" "^7.13.10"
-    "@radix-ui/react-slot" "1.0.1"
-
-"@radix-ui/react-scroll-area@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/@radix-ui/react-scroll-area/-/react-scroll-area-1.0.2.tgz"
-  integrity sha512-k8VseTxI26kcKJaX0HPwkvlNBPTs56JRdYzcZ/vzrNUkDlvXBy8sMc7WvCpYzZkHgb+hd72VW9MqkqecGtuNgg==
-  dependencies:
-    "@babel/runtime" "^7.13.10"
-    "@radix-ui/number" "1.0.0"
-    "@radix-ui/primitive" "1.0.0"
-    "@radix-ui/react-compose-refs" "1.0.0"
-    "@radix-ui/react-context" "1.0.0"
-    "@radix-ui/react-direction" "1.0.0"
-    "@radix-ui/react-presence" "1.0.0"
-    "@radix-ui/react-primitive" "1.0.1"
-    "@radix-ui/react-use-callback-ref" "1.0.0"
-    "@radix-ui/react-use-layout-effect" "1.0.0"
-
-"@radix-ui/react-slot@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/@radix-ui/react-slot/-/react-slot-1.0.1.tgz"
-  integrity sha512-avutXAFL1ehGvAXtPquu0YK5oz6ctS474iM3vNGQIkswrVhdrS52e3uoMQBzZhNRAIE0jBnUyXWNmSjGHhCFcw==
-  dependencies:
-    "@babel/runtime" "^7.13.10"
-    "@radix-ui/react-compose-refs" "1.0.0"
-
-"@radix-ui/react-use-callback-ref@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@radix-ui/react-use-callback-ref/-/react-use-callback-ref-1.0.0.tgz"
-  integrity sha512-GZtyzoHz95Rhs6S63D2t/eqvdFCm7I+yHMLVQheKM7nBD8mbZIt+ct1jz4536MDnaOGKIxynJ8eHTkVGVVkoTg==
-  dependencies:
-    "@babel/runtime" "^7.13.10"
-
-"@radix-ui/react-use-layout-effect@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@radix-ui/react-use-layout-effect/-/react-use-layout-effect-1.0.0.tgz"
-  integrity sha512-6Tpkq+R6LOlmQb1R5NNETLG0B4YP0wc+klfXafpUCj6JGyaUc8il7/kUZ7m59rGbXGczE9Bs+iz2qloqsZBduQ==
-  dependencies:
-    "@babel/runtime" "^7.13.10"
 
 "@repeaterjs/repeater@3.0.4":
   version "3.0.4"
@@ -1771,13 +1625,6 @@ argparse@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/argparse/-/argparse-2.0.1.tgz"
   integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
-
-aria-hidden@^1.1.3:
-  version "1.2.2"
-  resolved "https://registry.npmjs.org/aria-hidden/-/aria-hidden-1.2.2.tgz"
-  integrity sha512-6y/ogyDTk/7YAe91T3E2PR1ALVKyM2QbTio5HwM+N1Q6CMlCKhvClyIjkckBswa0f2xJhjsfzIGa1yVSe1UMVA==
-  dependencies:
-    tslib "^2.0.0"
 
 array-includes@^3.1.4, array-includes@^3.1.5, array-includes@^3.1.6:
   version "3.1.6"
@@ -2206,11 +2053,6 @@ clone@^1.0.2:
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==
 
-clsx@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/clsx/-/clsx-1.1.1.tgz"
-  integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
-
 color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.npmjs.org/color-convert/-/color-convert-1.9.3.tgz"
@@ -2446,11 +2288,6 @@ csso@^4.2.0:
   integrity sha512-wvlcdIbf6pwKEk7vHj8/Bkc0B4ylXZruLvOgs9doS5eOsOpuodOV2zJChSpkp+pRpYQLQMeF04nr3Z68Sta9jA==
   dependencies:
     css-tree "^1.1.2"
-
-csstype@3.0.9:
-  version "3.0.9"
-  resolved "https://registry.npmjs.org/csstype/-/csstype-3.0.9.tgz"
-  integrity sha512-rpw6JPxK6Rfg1zLOYCSwle2GFOOsnjmDYDaBwEcwoOg4qlsIVCN789VkBZDJAGi4T07gI4YSutR43t9Zz4Lzuw==
 
 csstype@^3.0.2:
   version "3.1.1"
@@ -5132,15 +4969,6 @@ react-slick@^0.29.0:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
-react-textarea-autosize@8.3.4:
-  version "8.3.4"
-  resolved "https://registry.npmjs.org/react-textarea-autosize/-/react-textarea-autosize-8.3.4.tgz"
-  integrity sha512-CdtmP8Dc19xL8/R6sWvtknD/eCXkQr30dtvC4VmGInhRsfF8X/ihXCq6+9l9qbxmKRiq407/7z5fxE7cVWQNgQ==
-  dependencies:
-    "@babel/runtime" "^7.10.2"
-    use-composed-ref "^1.3.0"
-    use-latest "^1.2.1"
-
 react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
@@ -5995,23 +5823,6 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
-
-use-composed-ref@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.npmjs.org/use-composed-ref/-/use-composed-ref-1.3.0.tgz"
-  integrity sha512-GLMG0Jc/jiKov/3Ulid1wbv3r54K9HlMW29IWcDFPEqFkSO2nS0MuefWgMJpeHQ9YJeXDL3ZUF+P3jdXlZX/cQ==
-
-use-isomorphic-layout-effect@^1.1.1:
-  version "1.1.2"
-  resolved "https://registry.npmjs.org/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.1.2.tgz"
-  integrity sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==
-
-use-latest@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/use-latest/-/use-latest-1.2.1.tgz"
-  integrity sha512-xA+AVm/Wlg3e2P/JiItTziwS7FK92LWrDB0p+hgXloIMuVCeJJ8v6f0eeHyPZaJrM+usM1FkFfbNCrJGs8A/zw==
-  dependencies:
-    use-isomorphic-layout-effect "^1.1.1"
 
 util-deprecate@^1.0.1, util-deprecate@^1.0.2:
   version "1.0.2"

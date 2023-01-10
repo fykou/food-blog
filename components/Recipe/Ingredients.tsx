@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useState } from 'react'
+import { useLocalStorage } from '../../hooks/useLocalStorageHook'
 import { ComponentRecipeDataIngredientSection, Maybe } from '../../services/graphql-types'
+import { convertUnits } from '../../utils/convertUnits'
+import { Unit } from '../../utils/enums'
 
-type Props = {
+interface Props {
     ingredientsSection: Maybe<Array<Maybe<ComponentRecipeDataIngredientSection>>> | undefined
 }
 
+// create a dictionary of units and wether or not they are metric
+const isMetricUnits = {
+    [Unit.g]: true,
+    [Unit.kg]: true,
+    [Unit.ml]: true,
+    [Unit.l]: true,
+    [Unit.tsp]: false,
+    [Unit.tbsp]: false,
+    [Unit.cup]: false,
+    [Unit.ounce]: false,
+    [Unit.other]: false,
+}
+
 const Ingredients: React.FC<Props> = (props: Props) => {
+    const metricToggleRef = useRef<HTMLLabelElement>(null)
+    const [showImperial, setShowImperial] = useLocalStorage<boolean>('showImperial', false)
+
     const [ingredientsSectionList, setIngredientsSectionList] = useState(
         props.ingredientsSection?.map((ingredientData) => ({
             ...ingredientData,
@@ -14,6 +33,9 @@ const Ingredients: React.FC<Props> = (props: Props) => {
             ingredients: ingredientData?.ingredients?.map((ingredient) => ({
                 ...ingredient,
                 completed: false,
+                isMetric: isMetricUnits[ingredient?.unit as Unit],
+                metricAmount: convertUnits(ingredient?.unit as Unit, ingredient?.amount as number, true),
+                imperialAmount: convertUnits(ingredient?.unit as Unit, ingredient?.amount as number, false),
             })),
         })),
     )
@@ -26,7 +48,6 @@ const Ingredients: React.FC<Props> = (props: Props) => {
             if (ingredientSection.id === sectionID) {
                 if (ingredientID === undefined) {
                     ingredientSection.completed = !ingredientSection.completed
-                    return
                 }
                 ingredientSection.ingredients?.forEach((ingredient) => {
                     if (ingredient.id === ingredientID) {
@@ -43,6 +64,17 @@ const Ingredients: React.FC<Props> = (props: Props) => {
     return (
         <div className='font-serif px-4 md:px-0'>
             <h2>Ingredients</h2>
+            <label ref={metricToggleRef} className='relative inline-flex items-center cursor-pointer'>
+                <input
+                    type='checkbox'
+                    value=''
+                    className='sr-only peer'
+                    onChange={() => setShowImperial(!showImperial)}
+                    checked={showImperial}
+                />
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600" />
+                <span className='ml-3 w-4 text-sm font-medium'>{showImperial ? 'imperial' : 'metric'}</span>
+            </label>
 
             {ingredientsSectionList?.map((ingredientSection) => (
                 <div key={ingredientSection.id} className='mb-4'>
@@ -61,7 +93,13 @@ const Ingredients: React.FC<Props> = (props: Props) => {
                                     className='cursor-checkbox'
                                 >
                                     <p className={`text-left font-serif ${ingredient.completed ? 'line-through' : ''}`}>
-                                        {ingredient.amount} {ingredient.unit} {ingredient.ingredient}
+                                        {showImperial
+                                            ? ingredient.imperialAmount.converted.amount
+                                            : ingredient.metricAmount.converted.amount}{' '}
+                                        {showImperial
+                                            ? ingredient.imperialAmount.converted.unit
+                                            : ingredient.metricAmount.converted.unit}{' '}
+                                        {ingredient.ingredient}
                                     </p>
                                 </button>
                             </li>
