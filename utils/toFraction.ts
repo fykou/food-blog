@@ -10,10 +10,10 @@ export function convertToFraction(decimal: number): string {
     let denominator = Math.pow(10, len)
     let numerator = decimal * denominator
 
-    const divisor = gcd(numerator, denominator) // Should be 5
+    const divisor = gcd(numerator, denominator)
 
-    numerator /= divisor // Should be 687
-    denominator /= divisor // Should be 2000
+    numerator /= divisor
+    denominator /= divisor
 
     return Math.floor(numerator).toString() + '/' + Math.floor(denominator).toString()
 }

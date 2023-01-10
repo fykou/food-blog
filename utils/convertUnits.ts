@@ -1,6 +1,10 @@
 import { Unit } from './enums'
 import { convertToFraction } from './toFraction'
 
+function mround(n: number, multiple: number) {
+    return Math.round(n / multiple) * multiple
+}
+
 export function convertUnits(
     unit: Unit,
     amount: number,
@@ -67,7 +71,13 @@ export function convertUnits(
                 targetUnit = Unit.cup
                 convertedAmount = amount / 250
                 if (convertedAmount % 1 !== 0) {
-                    convertedAmount = convertToFraction(convertedAmount)
+                    let wholeNumber: number = Math.floor(convertedAmount)
+                    const restDec = convertedAmount - wholeNumber
+                    let rest: number
+                    restDec <= 0.25 ? (rest = mround(restDec, 0.125)) : (rest = mround(restDec, 0.25))
+                    if (rest <= 0) rest = 0.125
+                    if (rest >= 1) wholeNumber += 1
+                    convertedAmount = (wholeNumber ? wholeNumber.toString() + ' + ' : '') + convertToFraction(rest)
                 }
             }
             break

@@ -57,13 +57,13 @@ const RecipePage: React.FC<Props> = (props: Props) => {
 
             <article className='max-w-screen-laptop self-center md:mx-16 md:mt-8 mb-16'>
                 <div className='grid grid-cols-1 md:grid-cols-[minmax(0,_1fr)_minmax(0,_1.5fr)] grid-flow-row gap-8 w-screen md:px-16'>
-                    {/* <div className='aspect-[3/4]'>
+                    <div className='aspect-[3/4]'>
                         <ImageComp
                             imageData={props.recipeResponse?.recipeData.data.attributes?.coverImage?.data?.attributes}
                             format={{ medium: true }}
                             className='rounded-md'
                         />
-                    </div> */}
+                    </div>
                     <div className='font-serif whitespace-normal px-4 md:px-0'>
                         <h1 className='py-4'>{props.recipeResponse?.recipeData.data?.attributes?.name}</h1>
                         <p className='py-4'>{props.recipeResponse?.recipeData.data?.attributes?.description}</p>
