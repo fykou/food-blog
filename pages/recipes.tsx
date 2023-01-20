@@ -1,5 +1,5 @@
 import { ApolloError } from '@apollo/client'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 import React from 'react'
@@ -61,8 +61,9 @@ interface IParams extends ParsedUrlQuery {
     tag: string
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
-    const { category, tag } = context as IParams
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const { category } = context.query as IParams
+    const { tag } = context.query as IParams
 
     const categoryFilter = category ? { category: { title: { eq: `${category}` } } } : {}
     const tagFilter = tag ? { tags: { tag: { eq: `${tag}` } } } : {}

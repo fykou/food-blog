@@ -1,7 +1,7 @@
 import React from 'react'
 import PageLayout from '../components/PageLayout'
 import Head from 'next/head'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps, GetStaticProps } from 'next'
 import { MyApolloClient } from '../services/graphql'
 import { GET_ABOUT } from '../services/graphql/queries'
 import ImageComp from '../components/ImageComp'
@@ -79,7 +79,7 @@ const about: React.FC<Props> = (props: Props) => {
 
 export default about
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
     const client = MyApolloClient()
     let error: ApolloError | null = null
     const aboutResponse = await client

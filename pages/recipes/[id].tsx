@@ -1,5 +1,5 @@
 import React from 'react'
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 import Directions from '../../components/Recipe/Directions'
@@ -109,7 +109,7 @@ interface IParams extends ParsedUrlQuery {
     id: string
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     const { id } = context.params as IParams
 
     const client = MyApolloClient()

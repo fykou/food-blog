@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react'
 import { ApolloError } from '@apollo/client'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps, GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import ErrorComponent from '../components/ErrorComponent'
@@ -103,7 +103,7 @@ const CardSection = ({ children, title, href }: { children: JSX.Element; title: 
 
 export default Dashboard
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
     const client = MyApolloClient()
     let recipesError: ApolloError | undefined
     let categoryError: ApolloError | undefined
