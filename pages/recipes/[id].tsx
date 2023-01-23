@@ -1,5 +1,5 @@
 import React from 'react'
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 import Directions from '../../components/Recipe/Directions'
@@ -135,12 +135,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 error,
             },
         },
-    }
-}
-
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-    return {
-        paths: [], // indicates that no page needs be created at build time
-        fallback: 'blocking', // indicates the type of fallback
     }
 }

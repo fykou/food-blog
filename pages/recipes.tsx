@@ -1,5 +1,5 @@
 import { ApolloError } from '@apollo/client'
-import { GetServerSideProps, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 import React from 'react'
