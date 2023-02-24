@@ -18,6 +18,7 @@ type Props = {
 }
 
 type RecipeResponse = {
+    id: string
     recipeData: RecipeEntityResponse
     error?: ApolloError
 }
@@ -79,6 +80,7 @@ const RecipePage: React.FC<Props> = (props: Props) => {
                         )}
                     </div>
                     <Ingredients
+                        recipeId={props.recipeResponse?.id}
                         className='sm:sticky sm:top-5'
                         ingredientsSection={props.recipeResponse?.recipeData.data?.attributes?.ingredientsSection}
                     />
@@ -131,16 +133,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
         props: {
             recipeResponse: {
+                id,
                 recipeData,
                 error,
             },
         },
-    }
-}
-
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-    return {
-        paths: [], // indicates that no page needs be created at build time
-        fallback: 'blocking', // indicates the type of fallback
     }
 }

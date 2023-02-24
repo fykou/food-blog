@@ -33,11 +33,12 @@ const ImageComp: React.FC<Props> = (props: Props) => {
         return props.imageData?.url
     })
 
+
     return (
         <div className='w-full h-full relative'>
             <Image
                 ref={ref}
-                src={src}
+                src={src || '/.'}
                 quality={75}
                 alt={`${props.imageData?.alternativeText ?? props.imageData?.name ?? 'could not find image'}`}
                 className={`${props.className} whitespace-pre-wrap shadow-inner shadow-gray-500`}

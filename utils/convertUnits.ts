@@ -5,10 +5,29 @@ function mround(n: number, multiple: number) {
     return Math.round(n / multiple) * multiple
 }
 
+const toCup = (amount: number) => {
+    if (amount % 1 !== 0) {
+        let wholeNumber: number = Math.floor(amount)
+        const restDec = amount - wholeNumber
+        let rest: number
+        restDec <= 0.25 ? (rest = mround(restDec, 0.125)) : (rest = mround(restDec, 0.25))
+        if (rest <= 0) rest = 0.125
+        while (rest >= 1) {
+            wholeNumber++
+            rest--
+        }
+        if (wholeNumber === 0) return convertToFraction(rest)
+        if (rest === 0) return wholeNumber.toString()
+        return (wholeNumber ? wholeNumber.toString() + ' + ' : '') + convertToFraction(rest)
+    }
+    return amount
+}
+
 export function convertUnits(
     unit: Unit,
     amount: number,
     toMetric: boolean,
+    ingredient?: string,
 ): { converted: { unit: Unit; amount: string }; original: { unit: Unit; amount: string } } {
     if (isNaN(amount) || !amount) {
         return { converted: { unit: Unit.other, amount: '' }, original: { unit: Unit.other, amount: '' } }
@@ -26,18 +45,30 @@ export function convertUnits(
             if (toMetric) {
                 targetUnit = Unit.tsp
                 convertedAmount = amount
+                if (amount < 1){
+                    convertedAmount = convertToFraction(amount)
+                }
             } else {
                 targetUnit = Unit.tsp
                 convertedAmount = amount
+                if (amount < 1){
+                    convertedAmount = convertToFraction(amount)
+                }
             }
             break
         case Unit.tbsp:
             if (toMetric) {
                 targetUnit = Unit.tbsp
                 convertedAmount = amount
+                if (amount < 1){
+                    convertedAmount = convertToFraction(amount)
+                }
             } else {
                 targetUnit = Unit.tbsp
                 convertedAmount = amount
+                if (amount < 1){
+                    convertedAmount = convertToFraction(amount)
+                }
             }
             break
         case Unit.ounce:
@@ -55,7 +86,7 @@ export function convertUnits(
                 convertedAmount = amount * 250
             } else {
                 targetUnit = Unit.cup
-                convertedAmount = amount
+                convertedAmount = toCup(amount)
             }
             break
         case Unit.g:
@@ -69,16 +100,7 @@ export function convertUnits(
                 }
             } else {
                 targetUnit = Unit.cup
-                convertedAmount = amount / 250
-                if (convertedAmount % 1 !== 0) {
-                    let wholeNumber: number = Math.floor(convertedAmount)
-                    const restDec = convertedAmount - wholeNumber
-                    let rest: number
-                    restDec <= 0.25 ? (rest = mround(restDec, 0.125)) : (rest = mround(restDec, 0.25))
-                    if (rest <= 0) rest = 0.125
-                    if (rest >= 1) wholeNumber += 1
-                    convertedAmount = (wholeNumber ? wholeNumber.toString() + ' + ' : '') + convertToFraction(rest)
-                }
+                convertedAmount = toCup(amount / 250)
             }
             break
         case Unit.kg:
@@ -102,6 +124,10 @@ export function convertUnits(
             } else {
                 targetUnit = Unit.tsp
                 convertedAmount = amount / 5
+                if (convertedAmount > 5) {
+                    targetUnit = Unit.cup
+                    convertedAmount = toCup(amount / 250)
+                }
             }
             break
         case Unit.l:
@@ -110,11 +136,15 @@ export function convertUnits(
                 convertedAmount = amount
             } else {
                 targetUnit = Unit.cup
-                convertedAmount = amount / 250
+                convertedAmount = toCup(amount / 250)
             }
+            break
+        default:
+            convertedAmount = ""
+            targetUnit = Unit.other
             break
     }
 
-    const converted = { unit: targetUnit as Unit, amount: convertedAmount.toString() }
+    const converted = { unit: targetUnit, amount: convertedAmount.toString() }
     return { converted, original }
 }

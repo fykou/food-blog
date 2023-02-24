@@ -89,6 +89,8 @@ export const GET_RECIPE = gql`
 						section
 						ingredients {
 							amount
+                            alternativeAmount
+                            additionalText
 							id
 							ingredient
 							optional

@@ -1,14 +1,44 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import React, { useRef } from 'react'
-import { useState } from 'react'
 import { useLocalStorage } from '../../hooks/useLocalStorageHook'
-import { ComponentRecipeDataIngredientSection, Maybe } from '../../services/graphql-types'
+import { ComponentRecipeDataIngredients, ComponentRecipeDataIngredientSection, Maybe } from '../../services/graphql-types'
 import { convertUnits } from '../../utils/convertUnits'
 import { Unit } from '../../utils/enums'
 
 interface Props {
+    recipeId: string
     ingredientsSection: Maybe<Array<Maybe<ComponentRecipeDataIngredientSection>>> | undefined
     className?: string
 }
+
+// interface Ingredient extends ComponentRecipeDataIngredients{
+//     completed: boolean
+//     isMetric: boolean
+//     metricAmount: {
+//         converted: {
+//             amount: Unit
+//             unit: string
+//         }
+//         original: {
+//             amount: Unit
+//             unit: string
+//         }
+//     }
+//     imperialAmount: {
+//         converted: {
+//             amount: Unit
+//             unit: string
+//         }
+//         original: {
+//             amount: Unit
+//             unit: string
+//         }
+//     }
+// }
+// interface Ingredients extends ComponentRecipeDataIngredientSection {
+//     ingredients?: Maybe<Array<Maybe<Ingredient>>> | undefined;
+//     completed: boolean
+// }
 
 // create a dictionary of units and wether or not they are metric
 const isMetricUnits = {
@@ -28,7 +58,7 @@ const Ingredients: React.FC<Props> = (props: Props) => {
     const [showImperial, setShowImperial] = useLocalStorage<boolean>('showImperial', false)
 
     const [ingredientsSectionList, setIngredientsSectionList] = useLocalStorage(
-        'ingredientsSectionList',
+        `ingredientsSectionList - id:${props.recipeId}`,
         props.ingredientsSection?.map((ingredientData) => ({
             ...ingredientData,
             completed: false,
@@ -36,8 +66,8 @@ const Ingredients: React.FC<Props> = (props: Props) => {
                 ...ingredient,
                 completed: false,
                 isMetric: isMetricUnits[ingredient?.unit as Unit],
-                metricAmount: convertUnits(ingredient?.unit as Unit, ingredient?.amount as number, true),
-                imperialAmount: convertUnits(ingredient?.unit as Unit, ingredient?.amount as number, false),
+                metricAmount: convertUnits(ingredient?.unit as Unit, ingredient?.amount as number, true, ingredient?.ingredient),
+                imperialAmount: convertUnits(ingredient?.unit as Unit, ingredient?.amount as number, false, ingredient?.ingredient),
             })),
         })),
     )
@@ -61,6 +91,26 @@ const Ingredients: React.FC<Props> = (props: Props) => {
         setIngredientsSectionList(newIngredientsList)
     }
 
+    const resetIngredients = () => {
+        setIngredientsSectionList(
+            ingredientsSectionList?.map((ingredientData) => ({
+                ...ingredientData,
+                completed: false,
+                ingredients: ingredientData?.ingredients?.map((ingredient) => ({
+                    ...ingredient,
+                    completed: false,
+                })),
+            })),
+        )
+        localStorage.removeItem(`ingredientsSectionList - id:${props.recipeId}`)
+    }
+
+    const displayUnitAndAmount = (ingredient: any) => {
+        if (ingredient.alternativeAmount) return String(ingredient.alternativeAmount).charAt(0).toUpperCase() + String(ingredient.alternativeAmount).slice(1)
+        if (showImperial) return String(ingredient.imperialAmount.converted.amount) + ' ' + String(ingredient.imperialAmount.converted.unit)
+        return String(ingredient.metricAmount.converted.amount) + ' ' + String(ingredient.metricAmount.converted.unit)
+    }
+
     if (props.ingredientsSection == null || props.ingredientsSection.length < 1) return null
 
     return (
@@ -80,16 +130,7 @@ const Ingredients: React.FC<Props> = (props: Props) => {
             <button
                 className='text-left bg-m_tertiary w-fit hover:bg-m_tertiary_hover text-white p-1 px-2 rounded-full'
                 onClick={() => {
-                    setIngredientsSectionList(
-                        ingredientsSectionList?.map((ingredientData) => ({
-                            ...ingredientData,
-                            completed: false,
-                            ingredients: ingredientData?.ingredients?.map((ingredient) => ({
-                                ...ingredient,
-                                completed: false,
-                            })),
-                        })),
-                    )
+                    resetIngredients()
                 }}
             >
                 reset checks
@@ -112,14 +153,8 @@ const Ingredients: React.FC<Props> = (props: Props) => {
                                     onClick={() => handleToggle(ingredientSection.id, ingredient.id)}
                                     className='cursor-checkbox'
                                 >
-                                    <p className={`text-left font-serif ${ingredient.completed ? 'line-through' : ''}`}>
-                                        {showImperial
-                                            ? ingredient.imperialAmount.converted.amount
-                                            : ingredient.metricAmount.converted.amount}{' '}
-                                        {showImperial
-                                            ? ingredient.imperialAmount.converted.unit
-                                            : ingredient.metricAmount.converted.unit}{' '}
-                                        {ingredient.ingredient}
+                                    <p className={`text-left font-serif whitespace-pre-line ${ingredient.completed ? 'line-through' : ''}`}>
+                                        {displayUnitAndAmount(ingredient)} {' '} {ingredient.ingredient?.toLocaleLowerCase()} <span className='text-gray-500'> {ingredient.additionalText ? ' - ' + ingredient.additionalText?.toLocaleLowerCase() : ''}</span>
                                     </p>
                                 </button>
                             </li>
@@ -130,5 +165,6 @@ const Ingredients: React.FC<Props> = (props: Props) => {
         </div>
     )
 }
+
 
 export default Ingredients
