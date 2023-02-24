@@ -1,5 +1,5 @@
 import React from 'react'
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { ParsedUrlQuery } from 'querystring'
 import Directions from '../../components/Recipe/Directions'

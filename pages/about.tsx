@@ -1,7 +1,7 @@
 import React from 'react'
 import PageLayout from '../components/PageLayout'
 import Head from 'next/head'
-import { GetServerSideProps, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { MyApolloClient } from '../services/graphql'
 import { GET_ABOUT } from '../services/graphql/queries'
 import ImageComp from '../components/ImageComp'
